@@ -1,86 +1,84 @@
-from django.shortcuts import render
-from .models import Category,Project,ProjectImage,Product,ProductImage
 from django.shortcuts import render, get_object_or_404
+from .forms import BookingForm
+from .models import ServiceCategory, Service
+from .models import Gallery
 from django.shortcuts import render, redirect
-from .forms import ContactForm
-from django.core.mail import send_mail
-from django.conf import settings
 
 def home(request):
-    
-    products = Product.objects.all()
-    projects = Project.objects.all()
-    return render(request,'Warzone/home.html',{'projects':projects,'products':products});
+    return render(request, 'Warzone/home.html')
 
-def product(request):
-    categories = Category.objects.all()
-    products = Product.objects.all()
-    return render(request, 'Warzone/product.html', {'categories': categories,'products': products},)
+def category_with_services(request):
+    categories = ServiceCategory.objects.prefetch_related("services__images")
 
-def project(request):
-    projects = Project.objects.all()
-    
-    return render(request, 'Warzone/work.html', {'projects': projects})
+    return render(request, "Warzone/category_services.html", {
+        "categories": categories
+    })
 
-def project_detail(request,project_id):
-    project = get_object_or_404(Project,pk=project_id)
-    images = project.images.all()
-    return render(request,'Warzone/projectdetail.html',{'project':project,'images':images})
-    
-    
+def service_detail(request, pk):
+    service = get_object_or_404(Service, pk=pk, is_active=True)
 
+    return render(request, "Warzone/service_detail.html", {
+        "service": service
+    })
 
-def product_list(request, category_id):
-    category = get_object_or_404(Category, pk=category_id)
-    products = category.products.all()  # Uses the related_name 'projects'
-    return render(request, 'Warzone/category_detail.html', {'category': category, 'products': products})
+def gallery_view(request):
+    images = Gallery.objects.filter(is_active=True).order_by("-created_at")
 
-def product_detail(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    images = product.images.all()  # Uses the related_name 'images'
-    return render(request, 'Warzone/productdetail.html', {'product': product, 'images': images})
+    return render(request, "Warzone/gallary.html", {
+        "images": images
+    })
 
-def services(request):
-    return render(request, 'Warzone/services.html')
-def work(request):
-    return render(request, 'Warzone/work.html')
-def about(request):
-    return render(request, 'Warzone/about.html')
-def contact(request):
-    return render(request, 'Warzone/contact.html')
+from django.core.mail import send_mail
+def booking_view(request, service_id=None):
+    service = None
+    if service_id:
+        service = Service.objects.get(id=service_id)
 
-def contactc(request):
-    if request.method == 'POST':
-        form = ContactForm(request.POST)
+    if request.method == "POST":
+        form = BookingForm(request.POST)
         if form.is_valid():
-            # Save the form data to the database
-            form.save()
-
-            # Get the form data to send in the email
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            mobile = form.cleaned_data['mobile']
-            description = form.cleaned_data['description']
+            booking = form.save()
             
-            # Compose the email content
-            subject = f'New Contact Message from {name}'
-            message = f"Name: {name}\nEmail: {email}\nPhone: {mobile}\nMessage: {description}"
-            recipient_email = 'najus777@gmail.com'  # Replace with the recipient's email address
-            
-            try:
-                # Send the email using Django's send_mail function
-                send_mail(subject, message, settings.EMAIL_HOST_USER, [recipient_email])
-
-                # Redirect to success page or any other appropriate page
-                return redirect('Warzone:success')  # You can change 'Warzone:success' to your actual success URL
-            except Exception as e:
-                # Handle any errors that occur while sending the email
-                print(f"Error sending email: {e}")
-                return render(request, 'Warzone/contact.html', {'form': form, 'error': 'There was an error sending the email. Please try again.'})
-
+            # Email
+            services_selected = ", ".join([str(s) for s in booking.services.all()])
+            subject = "New Booking Received"
+            message = (
+                f"A new booking has been made:\n\n"
+                f"Name: {booking.name}\n"
+                f"Email: {booking.email}\n"
+                f"Phone: {booking.phone}\n"
+                f"Services: {services_selected}\n"
+                f"Date: {booking.date}\n"
+                f"Time: {booking.time}\n"
+            )
+            recipient_list = ["najus77@gmail.com"]
+            if booking.email and booking.email not in recipient_list:
+                recipient_list.append(booking.email)
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=None,
+                recipient_list=recipient_list,
+                fail_silently=True,
+            )
+            return render(request, "Warzone/booking_success.html")
     else:
-        form = ContactForm()
+        # If service_id is sent, pre-fill form
+        initial_data = {}
+        if service:
+            initial_data['services'] = [service]  # assuming your BookingForm has a services field
+        form = BookingForm(initial=initial_data)
 
-    return render(request, 'Warzone/contact.html', {'form': form})
-def success(request):
-    return render(request, 'Warzone/success.html')
+    return render(request, "Warzone/booking.html", {"form": form, "service": service})
+
+def about(request):
+    """
+    Renders the About Us page.
+    """
+    return render(request, "Warzone/about.html")
+
+def care(request):
+    """
+    Renders the About Us page.
+    """
+    return render(request, "Warzone/care.html")

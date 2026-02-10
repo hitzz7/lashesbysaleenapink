@@ -4,124 +4,24 @@
 {% block title %}About Us{% endblock %}
 
 {% block content %}
-<style>
-    .about-section {
-        padding: 40px;
-        text-align: center;
-        margin-top:60px;
-        
-    }
-    
-    
-    .about-section h3 {
-        font-size: 72px;
-        font-family:"Calton",sans-serif;
-        margin-bottom: 20px;
-    }
-     h4 {
-        font-size: 52px;
-        font-family:"Calton",sans-serif;
-        margin:15px;
-        text-align:center;
-    }
-    
-    .about-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width:1400px;
-        gap: 100px;
-        margin-top: 100px;
-    }
-    
-    .about-content .image img {
-        width: 100%;
-        height:auto;
-        object-fit:cover;
-        border-radius: 8px;
-    }
-    
-    .about-content .text {
-        max-width: 600px;
-        text-align: left;
-        font-size: 26px;
-        font-family: 'Itronz', sans-serif;
-        line-height: 1.6;
-        margin-bottom:100px;
-    }
-    
 
-    
-</style>
 <div class="about-section">
-    <h2>About Us</h2>
     
-    <div class="about-content">
-        <div class="image">
-            <img src="{% static 'instal.jpg' %}" alt="About Us">
-        </div>
-        <div class="text">
-            <h3>who are itronz?</h3>
+    <div class="about-box">
+        <div class="about-text">
+            <h2>About US</h2>
             <p>
-                Our mission is to deliver exceptional quality and ensure customer satisfaction. With a dedicated team and years of experience, we strive to make a positive impact in the industry.
+                At UAE Packaging & Printing Services, we provide high-quality, custom printing and packaging solutions that enhance your brand. With years of experience and a focus on excellence, we deliver impactful designs, durable products, and reliable service to clients across the UAE, Qatar, Oman, Saudi Arabia, and beyond.
             </p>
+            
+            <button class="button">More About Us</button>
         </div>
+        <img src="{% static 'eyelash1.jpg' %}" alt="Service Image" class="about-image">
+        
     </div>
-</div>
-<h4> We specialize in providing top-notch products and services that meet your needs.</h4>
-<h4> We specialize in providing top-notch products and services that meet your needs.</h4>
-<div class="testimonial-section">
-    <h2>What Our Clients Say</h2>
-    <div class="testimonial-container">
-        <div class="testimonial-card">
-            <img src="{% static 'gand.png' %}" alt="Client Logo" class="client-logo">
-            <p>"Itronz provided exceptional service and exceeded our expectations. Their dedication and attention to detail were remarkable."</p>
-            <h4>John Doe</h4>
-            <div class="client-title">CEO, TechCo</div>
-        </div>
-        <div class="testimonial-card">
-            <img src="{% static 'bb.png' %}" alt="Client Logo" class="client-logo">
-            <p>"The team at Itronz is professional, skilled, and highly dependable. We've seen a significant improvement in our operations thanks to their efforts."</p>
-            <h4>Jane Smith</h4>
-            <div class="client-title">Founder, WebSolutions</div>
-        </div>
-        <div class="testimonial-card">
-            <img src="{% static 'client_logo3.jpg' %}" alt="Client Logo" class="client-logo">
-            <p>"Itronz went above and beyond in delivering top-quality products. We highly recommend their services to anyone looking for reliable results."</p>
-            <h4>Michael Brown</h4>
-            <div class="client-title">Managing Director, Innovate Ltd.</div>
-        </div>
-    </div>
-</div>
-
-<div class="bg-image">
-    <video controls autoplay muted loop>
-        <source src="{% static 'camera1.mp4' %}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="text-overlay1">
-        <h1>"Safety through surveillance."
-            "Always watching, always protecting."</h1>
-            <p>asjhdjashfjahf jfsjahfj asjfhasjf jasnfjasnfjasnfjansjfnajsbf</p>
-            <button class="button">About us</button>
-</div>
-</div>
-<div class="project-stats">
-    <div class="stat-item">
-        <h1>Projects Completed</h1>
-        <i class="fas fa-check-circle"></i>
-        <span>30+</span>
-    </div>
-    <div class="stat-item">
-        <h1>Years of Experience</h1>
-        <i class="fas fa-clock"></i>
-        <span>2yrs</span>
-    </div>
-    <div class="stat-item">
-        <h1>Team Members</h1>
-        <i class="fas fa-users"></i>
-        <span>15+</span>
-    </div>
+    
+    
+    
 </div>
 
 {% endblock %}

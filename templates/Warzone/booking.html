@@ -1,0 +1,249 @@
+{% extends './navbar.html' %}
+{% load static %}
+
+{% block title %}Book an Appointment{% endblock %}
+
+{% block content %}
+<div class="booking-container">
+    <h1>Book an Appointment</h1>
+    <p class="booking-subtitle">Select your services, date, and time below</p>
+    <form method="post" class="booking-form booking-form-vertical" style="display: flex; flex-direction: column; height: 100%;">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+
+        <div class="vertical-form-fields" style="flex: 1 1 auto;">
+            {% if field.name == "services" %}
+    <div class="form-group services-horizontal-group">
+        {{ field.label_tag }}
+        <div class="services-boxes-container">
+            {% for group in field.field.choices %}
+                {% if group.0 %}
+                    <div class="service-category-label">{{ group.0 }}</div>
+                {% endif %}
+                <div class="services-box-group">
+                    {% for service_choice in group.1 %}
+                        {% with id=service_choice.0 name=service_choice.1 %}
+                            {% if service and id == service.id %}
+                                <!-- Pre-selected & locked service -->
+                                <input type="hidden" name="{{ field.name }}" value="{{ id }}">
+                                <label class="service-box selected">{{ name }}</label>
+                            {% else %}
+                                <input 
+                                    type="checkbox"
+                                    name="{{ field.name }}"
+                                    value="{{ id }}"
+                                    id="id_service_{{ id }}"
+                                    class="hidden-service-checkbox"
+                                    {% if field.value and id|stringformat:"s" in field.value|stringformat:"s" %}checked{% endif %}
+                                >
+                                <label 
+                                    for="id_service_{{ id }}"
+                                    class="service-box{% if field.value and id|stringformat:'s' in field.value|stringformat:'s' %} selected{% endif %}"
+                                    tabindex="0"
+                                >{{ name }}</label>
+                            {% endif %}
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        {% if field.help_text %}
+            <small class="help-text">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+            <div class="error">{{ error }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+            {% endfor %}
+        </div>
+        <div style="margin-top: auto; display: flex; justify-content: flex-end;">
+            <button type="submit" class="button">Book Now</button>
+        </div>
+    </form>
+</div>
+
+<style>
+.booking-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.booking-container h1 {
+    margin-bottom: 10px;
+    font-size: 3rem;
+    color: #333;
+    font-family: 'Senjal', sans-serif;
+}
+
+.booking-subtitle {
+    margin-bottom: 25px;
+    font-size: 1rem;
+    color: #666;
+    font-family: 'typo', sans-serif;
+}
+
+/* Stack form fields vertically and properly align/space them */
+.booking-form-vertical .vertical-form-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    flex: 1 1 auto;
+}
+
+.booking-form .form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+/* Service selection boxes styles */
+.services-boxes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.service-category-label {
+    font-size: 1.5rem;
+    color: #007a91;
+    font-weight: 600;
+    margin: 14px 0 8px 8px;
+    font-family: 'Glamor', sans-serif;
+}
+
+.services-box-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.service-box {
+    background: #f0f5f7;
+    color: #222;
+    border: 2px solid #d2e4e7;
+    border-radius: 10px;
+    padding: 15px 28px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+    outline: none;
+    box-shadow: 0 2px 8px rgba(0, 151, 178, 0.04);
+    display: block;
+    margin: 0;
+}
+
+.service-box.selected,
+.service-box:active {
+    background: #0097b2;
+    color: #fff;
+    border-color: #0097b2;
+    font-weight: bold;
+    box-shadow: 0 3px 12px rgba(0, 151, 178, 0.12);
+}
+
+.service-box:hover {
+    border-color: #007a91;
+    background: #e7f7fa;
+    color: #0097b2;
+}
+
+.booking-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #444;
+    font-family: 'typo', sans-serif;
+    font-size: 1.6em;
+}
+
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+.booking-form input:focus,
+.booking-form select:focus,
+.booking-form textarea:focus {
+    border-color: #0097b2;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 151, 178, 0.3);
+}
+
+.booking-form .error {
+    color: #d9534f;
+    font-size: 0.875rem;
+    margin-top: 5px;
+}
+
+.booking-form .help-text {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.btn-submit {
+    background-color: #0097b2;
+    color: #fff;
+    padding: 12px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 18px;
+}
+
+.btn-submit:hover {
+    background-color: #007a91;
+}
+
+.hidden-service-checkbox {
+    display: none !important;
+}
+</style>
+<script>
+// Service selection box logic
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll('.services-horizontal-group').forEach(function(group) {
+        group.querySelectorAll('.service-box').forEach(function(label) {
+            const input = document.getElementById(label.getAttribute('for'));
+            if (!input) return;
+            label.addEventListener('click', function(e) {
+                // Only react to user click, not keyboard/tab navigation.
+                e.preventDefault();
+                input.checked = !input.checked;
+                label.classList.toggle('selected', input.checked);
+            });
+            // Allow keyboard selection (accessibility)
+            label.addEventListener('keydown', function(e) {
+                if (e.key === " " || e.key === "Enter") {
+                    e.preventDefault();
+                    input.checked = !input.checked;
+                    label.classList.toggle('selected', input.checked);
+                }
+            });
+            // Set initial state for box
+            label.classList.toggle('selected', input.checked);
+        });
+    });
+});
+</script>
+{% endblock %}

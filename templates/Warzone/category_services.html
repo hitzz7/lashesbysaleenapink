@@ -1,0 +1,96 @@
+{% extends './navbar.html' %}
+{% load static %}
+
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+
+<style>
+   
+</style>
+
+<style>
+@font-face {
+    font-family: 'Senjal';
+    src: url("{% static 'fonts/Senjal-Regular.ttf' %}") format('truetype');
+    font-display: swap;
+}
+.services-main-title {
+    font-family: 'Senjal', Arial, sans-serif;
+    font-size: 3rem;
+    color: #222;
+    margin: 40px 0 24px 0;
+    letter-spacing: 2px;
+    text-align: center;
+}
+.category-header h2 {
+    font-family: 'Senjal', Arial, sans-serif;
+    font-size: 2.3rem;
+    color: #0097b2;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+/* Add margin to category sections */
+.category-section {
+    margin: 70px 40px;
+}
+</style>
+<h1 class="services-main-title">Beauty Services</h1>
+
+{% for category in categories %}
+    <section class="category-section">
+
+        <!-- Category Info -->
+        <div class="category-header">
+            
+            <h2>{{ category.name }}</h2>
+            <p class="category-description">{{ category.description }}</p>
+            <style>
+            .category-description {
+                font-size: 1.18rem;
+                color: #444;
+                margin-bottom: 24px;
+                margin-top: 6px;
+                font-family: 'typo', 'Arial', sans-serif;
+                text-align: center;
+                line-height: 1.45;
+                letter-spacing: 0.3px;
+            }
+            </style>
+        </div>
+
+        <div class="carousel-container">
+            <button class="carousel-btn prev" id="prevBtn-{{ forloop.counter0 }}">&#10094;</button>
+            <div class="carousel-track" id="carouselTrack-{{ forloop.counter0 }}">
+                {% for service in category.services.all %}
+                    {% if service.is_active %}
+                    <div class="card-outer">
+                        <a href="{% url 'store:service_detail' service.id %}" style="text-decoration:none;color:inherit;">
+                            <div class="card" style="cursor:pointer;">
+                                {% if service.images.first %}
+                                    <img src="{{ service.images.first.image.url }}" alt="{{ service.name }}" loading="lazy">
+                                {% endif %}
+                                <div class="overlay">{{ service.name }}</div>
+                            </div>
+                        </a>
+                        <div class="card-details">
+                            <span class="card-price">Rs {{ service.price }}</span>
+                            <span class="card-desc">{{ service.description|truncatewords:15 }}</span>
+                            <a href="{% url 'store:service_detail' service.id %}" style="display:block; color:#0097b2; font-weight:bold; margin-top:10px; text-decoration:none;">View Details</a>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% empty %}
+                    <p>No services available.</p>
+                {% endfor %}
+            </div>
+            <button class="carousel-btn next" id="nextBtn-{{ forloop.counter0 }}">&#10095;</button>
+        </div>
+
+        <!-- Services -->
+       
+
+    </section>
+{% endfor %}
+
+{% endblock %}

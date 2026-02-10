@@ -5,132 +5,176 @@
 
 {% block content %}
 <div class="bg-image">
-    
-        <img src="{% static 'heroimg.jpg' %}" alt="image">
-        
-    
-    <div class="text-overlay">
-        <div class="google-review">
-            <span class="rating-text">Excellent 4.5 out of 5</span>
-            <span class="stars">
-            <i class="fas fa-star"></i>
-            
-            </span>
-            
-        </div>
-        <h1>Your Logo </h1>
-        <p>Printing & Sigane for your Business</p>
-        <button class="button">Contact Us</button>
 
-        <div class="sales-label">1000+ Printing &Sinage Made</div>
-        
-    </div>
-    <div class="social-media">
-        <a href="#" target="_blank"><i class="fab fa-whatsapp"></i></a>
-        
-    </div>
+  <!-- LEFT SIDE (70%) -->
+  <div class="hero-left">
+      <div class="text-overlay">
+          <div class="google-review">
+              <span class="rating-text">Excellent 4.5 out of 5</span>
+              <span class="stars">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star-half-alt"></i>
+              </span>
+          </div>
+
+          <h1>Beautiful Lashes by Salena</h1>
+          <p>For Every Version of you</p>
+          <button class="button">View All Eyelashes</button>
+
+          
+      </div>
+  </div>
+
+  <!-- RIGHT SIDE (30%) -->
+  <div class="hero-right">
+      <div class="image-grid">
+          <div class="image-cell">
+              <img src="{% static 'sin3.jpg' %}" alt="">
+              <div class="image-text-overlay">Classic</div>
+          </div>
+          <div class="image-cell">
+              <img src="{% static 'sin2.jpg' %}" alt="">
+              <div class="image-text-overlay">Hybrid</div>
+          </div>
+          <div class="image-cell">
+              <img src="{% static 'sin3.jpg' %}" alt="">
+              <div class="image-text-overlay">Volume</div>
+          </div>
+          <div class="image-cell">
+              <img src="{% static 'sin2.jpg' %}" alt="">
+              <div class="image-text-overlay">Mega Volume</div>
+          </div>
+      </div>
+  </div>
+  <style>
+    .image-cell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    .image-cell img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .image-text-overlay {
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      width: 100%;
+      
+      color: #fff;
+      text-align: center;
+      font-size: 2.5rem;
+      padding: 7px 0 6px 0;
+      font-family: 'Glamor', sans-serif;
+      letter-spacing: 1px;
+      background-color: none;
+      border-radius: 0 0 8px 8px;
+      z-index: 2;
+      pointer-events: none;
+      
+    }
+  </style>
+
+</div>
     
 
     
    
 </div>
 
-<section class="brands-section">
-    
-    <div class="logo-strip">
-        <h2 class="brands-heading">Brands That Worked With Us</h2>
-        <div class="logo-track">
-            <img src="{% static 'bb.png' %}" alt="Logo 1">
-            <img src="{% static 'bb.png' %}" alt="Logo 2">
-            <img src="{% static 'bb.png' %}" alt="Logo 3">
-            <img src="{% static 'bb.png' %}" alt="Logo 4">
-            <img src="{% static 'bb.png' %}" alt="Logo 5">
-            <!-- Repeat logos for continuous scroll -->
-            <img src="{% static 'bb.png' %}" alt="Logo 1 copy">
-            <img src="{% static 'bb.png' %}" alt="Logo 2 copy">
-        </div>
+<section class="info-section" style="background: #E8D7CF; padding: 60px 0; text-align: center;">
+    <div class="container" style="max-width: 700px; margin: auto;">
+        <h2 style="font-size: 3rem; font-family: 'senjal', Arial, sans-serif; color: #222; margin-bottom: 28px;">
+          Beautiful lashes  powerful confidence
+        </h2>
+        <p style="font-size: 1.5rem; color: #444; margin-bottom: 18px; font-family: 'typo', sans-serif;">
+            Stand out from the crowd with custom signage and branding solutions for your business. 
+        </p>
+        
+        <a href="#contact" class="cta-btn" style="background: #FF69B4; color: #fff; padding: 17px 54px; border-radius: 12px; font-size: 25px; font-weight: 700; text-decoration: none; display: inline-block; box-shadow: 0 3px 14px rgba(255,64,129,0.10); transition: background 0.2s; font-family: 'Glamor', serif;">
+            Book a Appointment
+        </a>
     </div>
 </section>
 
+
+
 <section class="signs-section">
-    <h2 class="section-heading">Different Signs Available</h2>
+    <h2 class="section-heading">Eyelashes</h2>
 
     <div class="carousel-container">
         <button class="carousel-btn prev" id="prevBtn">&#10094;</button>
 
         <div class="carousel-track" id="carouselTrack">
-            <div class="card">
-                <img src="{% static 'sin3.jpg' %}"lo ading="lazy" alt="Sign 1">
-                <div class="overlay">2D Acrylic Sign</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'sin2.jpg' %}" loading="lazy" alt="Sign 2">
-                <div class="overlay">3D Board Sign</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'bag.png' %}" loading="lazy" alt="Sign 2">
-                <div class="overlay">Bags</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'stick.jpg' %}" loading="lazy" alt="Sign 2">
-                <div class="overlay">stickers</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'sin1.jpg' %}"  loading="lazy" alt="Sign 3">
-                <div class="overlay">led Light Boards</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'sin7.jpg' %}" loading="lazy" alt="Sign 4">
-                <div class="overlay">Custom Wall Art</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'sin8.jpg' %}" loading="lazy" alt="Sign 4">
-                <div class="overlay">hanging Sign</div>
-            </div>
-            <div class="card">
-                <img src="{% static 'van.png' %}" loading="lazy" alt="Sign 4">
-                <div class="overlay">Vehicles Graphics</div>
+            <div class="card-outer">
+                <div class="card">
+                    <img src="{% static 'sin3.jpg' %}" loading="lazy" alt="Sign 1">
+                    <div class="overlay">Acrylic Sign</div>
+                </div>
+                <div class="card-details">
+                    <span class="card-price">₨ 4,500</span>
+                    <span class="card-desc">Crystalclear acrylic, custom text or logo, premium finish.</span>
+                </div>
             </div>
             
-            <!-- Add more cards as needed -->
-        </div>
 
         <button class="carousel-btn next" id="nextBtn">&#10095;</button>
     </div>
 </section>
-<section class="features-section">
-    <div class="feature">
-      <img src="{% static 'web-design.png' %}"  loading="lazy" alt="Custom Designed">
-      <div class="text">
-        <h3>Custom Designed</h3>
-        <p>Each LED neon sign or artwork is designed in-house by our professional designers.</p>
-      </div>
-    </div>
-  
-    <div class="feature">
-      <img src="{% static 'renewable-energy.png' %}" alt="Energy Efficient">
-      <div class="text">
-        <h3>Energy & Cost Efficient</h3>
-        <p>Low energy consumption, 100,000+ hour lifespan, no heat or noise.</p>
-      </div>
-    </div>
-  
-    <div class="feature">
-      <img src="{% static 'muscle.png' %}" alt="Durable">
-      <div class="text">
-        <h3>Durable</h3>
-        <p>Latest neon flex technology which is stronger & lighter than glass neon tubes.</p>
-      </div>
-    </div>
-  
-    <div class="feature">
-      <img src="{% static 'installation.png' %}" alt="Easy to Install">
-      <div class="text">
-        <h3>Easy to Install</h3>
-        <p>Our high quality backboards feature pre-drilled holes for easy wall mounting & hanging.</p>
-      </div>
-    </div>
-  </section>
+
+<style>
+.card-outer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex: 0 0 auto;
+    width: 400px;
+    margin-bottom: 0;
+}
+@media (max-width: 768px) {
+    .card-outer {
+        width: 250px;
+    }
+}
+.card-details {
+    background: #fff;
+    padding: 14px 15px 13px 15px;
+    margin-top: 10px;
+    text-align: left;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    border-radius: 0 0 14px 14px;
+}
+.card-price {
+    display: block;
+    font-family: 'typo', serif;
+    color: #FF69B4;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+.card-desc {
+    color: #444;
+    font-size: 1.08rem;
+    font-family: "typo", sans-serif;
+    line-height: 1.3;
+    display: block;
+}
+.card {
+    position: relative;
+    border-radius: 14px;
+}
+</style>
+
 
 
 
@@ -142,23 +186,178 @@
     
     <div class="about-box">
         <div class="about-text">
-            <h2>Our Services</h2>
+            <h2>Lashes crafted to perfection</h2>
             <p>
-                We offer a complete range of professional printing and packaging services to help your business stand out, including custom-designed packaging for retail, corporate, and industrial needs, high-quality stickers and labels, eye-catching indoor and outdoor signage, and all types of custom printing from business cards to brochures. With fast delivery across the UAE and to clients in Qatar, Oman, Saudi Arabia, and beyond, we ensure top quality and timely service every time.
+                We offer a complete range of professional printing and packaging 
             </p>
             
             <button class="button">More Services</button>
         </div>
-        <img src="{% static 'sin8.jpg' %}"  loading="lazy" alt="Service Image" class="about-image">
+        <img src="{% static 'eyelash1.jpg' %}"  loading="lazy" alt="Service Image" class="about-image">
         
     </div>
     
     
     
 </div>
+<style>
+  .scroll-image-section {
+    position: relative;
+    width: 100vw;
+    height: 680px;
+    overflow: hidden;
+  }
+  .scroll-image-section img {
+    width: 100vw;
+    height: 780px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: brightness(0.8);
+  }
+  .scroll-overlay-text {
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .scroll-text-top {
+    position: absolute;
+    left: 8vw;
+    top: 20%;
+    font-size: 102px;
+    font-family: 'senjal', sans-serif;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 3px 7px rgba(0,0,0,0.38);
+    transition: transform 0.4s cubic-bezier(.4,2,.2,1);
+    will-change: transform;
+    display: block;
+  }
+  .scroll-text-bottom {
+    position: absolute;
+    right: 8vw;
+    bottom: 20%;
+    font-size: 102px;
+    font-family: 'senjal', sans-serif;
+    color: #F05098;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 2px 3px 7px rgba(0,0,0,0.4);
+    transition: transform 0.4s cubic-bezier(.4,2,.2,1);
+    will-change: transform;
+    display: block;
+  }
+
+  @media (max-width: 768px){
+    .scroll-image-section, .scroll-image-section img {height: 350px;}
+    .scroll-text-top, .scroll-text-bottom {font-size:40px;}
+    .scroll-text-top {left:6vw;}
+    .scroll-text-bottom {right:6vw;}
+  }
+</style>
+<section class="scroll-image-section">
+  <img src="{% static 'eyelash1.jpg' %}" alt="Banner Main">
+  <div class="scroll-overlay-text">
+    <div class="scroll-text-top" id="text-top">Beautiful lashes </div>
+    <div class="scroll-text-bottom" id="text-bottom">By saleena</div>
+  </div>
+</section>
+<script>
+  window.addEventListener("scroll", function() {
+    var section = document.querySelector('.scroll-image-section');
+    if (!section) return;
+    var sectionRect = section.getBoundingClientRect();
+    var windowH = window.innerHeight;
+    // EXTEND the scroll trigger even MORE and movement EVEN MORE
+    if (sectionRect.top < windowH && sectionRect.bottom > 0) {
+      var triggerFactor = 7.5; // much larger scroll trigger (must scroll further before max animation is reached)
+      var scrollProgress = Math.min(Math.max(
+        (windowH - sectionRect.top) / (windowH + sectionRect.height * triggerFactor), 0), 1);
+      var topMove = scrollProgress * 1150;    // much more movement (in pixels)
+      var bottomMove = scrollProgress * 940;
+      document.getElementById('text-top').style.transform =
+        'translateX(' + topMove + 'px)';
+      document.getElementById('text-bottom').style.transform =
+        'translateX(-' + bottomMove + 'px)';
+    }
+  });
+</script>
+<h2 style="font-size: 72px; font-family: 'senjal', sans-serif; text-align: center; width: 100%; padding: 40px; color: #222; background: #F8F3EF;">
+  After care
+</h2>
+<section class="features-section">
+  
+  <div class="feature">
+    <img src="{% static 'web-design.png' %}"  loading="lazy" alt="Custom Designed">
+    <div class="text">
+      <h3>Custom Designed</h3>
+      <p>Each LED neon sign or artwork is designed in-house by our professional designers.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'renewable-energy.png' %}" alt="Energy Efficient">
+    <div class="text">
+      <h3>Energy & Cost Efficient</h3>
+      <p>Low energy consumption, 100,000+ hour lifespan, no heat or noise.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'muscle.png' %}" alt="Durable">
+    <div class="text">
+      <h3>Durable</h3>
+      <p>Latest neon flex technology which is stronger & lighter than glass neon tubes.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'installation.png' %}" alt="Easy to Install">
+    <div class="text">
+      <h3>Easy to Install</h3>
+      <p>Our high quality backboards feature pre-drilled holes for easy wall mounting & hanging.</p>
+    </div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'web-design.png' %}"  loading="lazy" alt="Custom Designed">
+    <div class="text">
+      <h3>Custom Designed</h3>
+      <p>Each LED neon sign or artwork is designed in-house by our professional designers.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'renewable-energy.png' %}" alt="Energy Efficient">
+    <div class="text">
+      <h3>Energy & Cost Efficient</h3>
+      <p>Low energy consumption, 100,000+ hour lifespan, no heat or noise.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'muscle.png' %}" alt="Durable">
+    <div class="text">
+      <h3>Durable</h3>
+      <p>Latest neon flex technology which is stronger & lighter than glass neon tubes.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'installation.png' %}" alt="Easy to Install">
+    <div class="text">
+      <h3>Easy to Install</h3>
+      <p>Our high quality backboards feature pre-drilled holes for easy wall mounting & hanging.</p>
+    </div>
+  </div>
+</section>
 
 <section class="gallery-section">
-  <h2 class="gallery-heading">Our Projects</h2>
+  <h2 class="gallery-heading">Client Results</h2>
 
   <div class="gallery-wrapper">
     <div class="card-wrapper">
@@ -199,7 +398,9 @@
   
 </section>
 
-<section class="stats-section">
+  
+
+<!-- <section class="stats-section">
   <div class="stats-wrapper">
 
     <div class="stat-box">
@@ -228,26 +429,10 @@
 
   </div>
   <button class="button">View more Images</button> 
-</section>
-<section class="logo-upload-section">
-  <div class="logo-upload-container">
-    <!-- Text & Upload Button -->
-    <div class="logo-upload-text">
-      <h2>Place Your Logo</h2>
-      <p>Visualize your brand logo on our signs in real-time. Upload your logo and preview instantly.</p>
-      
-      <label for="logoInput" class="upload-label">
-        <i class="fas fa-upload"></i> Upload Your Logo
-      </label>
-      <input type="file" id="logoInput" accept="image/*" hidden>
-    </div>
-
-    <!-- Preview Image -->
-    
-</section>
+</section> -->
 
 <section class="testimonial-section">
-  <h2 class="section-title">What Our Clients Say</h2>
+  <h2 class="section-title">Google Review</h2>
 
   <div class="testimonial-container">
     <div class="testimonial-card">
@@ -306,7 +491,7 @@
             
             <button class="button">More About Us</button>
         </div>
-        <img src="{% static 'sin8.jpg' %}" alt="Service Image" class="about-image">
+        <img src="{% static 'eyelash1.jpg' %}" alt="Service Image" class="about-image">
         
     </div>
     

@@ -6,18 +6,12 @@ app_name = 'store'
 
 urlpatterns = [
     path('',views.home, name="home"),
-    path('product/', views.product, name='product'),
-    
-    path('product_list/<int:category_id>/', views.product_list, name='product_list'),
-    path('product_detail/<int:product_id>/', views.product_detail, name='product_detail'),
-    path('project_detail/<int:project_id>/', views.project_detail, name='project_detail'),
-     path('services/', views.services, name='services'),
-       path('about/', views.about, name='about'),
-       path('work/', views.project, name='work'),
-         path('contact/', views.contact, name='contact'),
-        #  path('start /', views.start, name='start'),
-         path('contactc/', views.contactc, name='contactc'),
-    path('success/', views.success, name='success'),
-    
+    path("category/", views.category_with_services, name="category_services"),
+    path("service/<int:pk>/", views.service_detail, name="service_detail"),
+    path("gallery/", views.gallery_view, name="gallery"),
+    path("booking/", views.booking_view, name="booking"),
+    path("about/", views.about, name="about"),
+    path("care/", views.care, name="care"),
+        
 ]
 

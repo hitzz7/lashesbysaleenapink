@@ -1,0 +1,137 @@
+{% extends './navbar.html' %}
+{% load static %}
+
+{% block title %}{{ service.name }}{% endblock %}
+
+{% block content %}
+
+
+
+<div class="service-detail-flex">
+    <div class="service-detail-image-gallery">
+        {% for image in service.images.all %}
+            <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="service-detail-image">
+        {% empty %}
+            <p style="color:#888;font-size:1.09rem;">No images available.</p>
+        {% endfor %}
+    </div>
+    <div class="service-detail-content sticky-detail-content">
+        <h1 class="service-detail-title">{{ service.name }}</h1>
+        <p class="service-detail-desc">{{ service.description }}</p>
+        <h3 class="service-detail-price">Price: Rs {{ service.price }}</h3>
+        <a href="{% url 'store:booking' %}" class="service-detail-btn">Book Appointment</a>
+    </div>
+</div>
+
+<style>
+.service-detail-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 42px;
+    margin: 50px;
+}
+.service-detail-image-gallery {
+    flex: 1 1 700px;
+    min-width: 600px;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.service-detail-image {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 14px;
+    box-shadow: 0 3px 22px rgba(0,0,0,0.12);
+    background: #f4f4f4;
+}
+.service-detail-content {
+    flex: 2 1 400px;
+    min-width: 300px;
+    max-width: 650px;
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+    justify-content: flex-start;
+    padding-top: 12px;
+    margin: 50px 50px;
+}
+.sticky-detail-content {
+    position: sticky;
+    top: 150px;
+    align-self: flex-start;
+    /* Ensure sticky doesn't push beyond parent height; add responsiveness below */
+}
+
+.service-detail-title {
+    font-size: 2.2rem;
+    margin: 0 0 8px 0;
+    font-family: 'Senjal', Arial, sans-serif;
+    color: #222;
+    letter-spacing: 1.5px;
+}
+.service-detail-desc {
+    color: #444;
+    font-size: 1.18rem;
+    line-height: 1.48;
+    margin-bottom: 14px;
+    font-family: 'typo', Arial, sans-serif;
+}
+.service-detail-price {
+    font-size: 1.3rem;
+    color: #0097b2;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+.service-detail-btn {
+    font-size: 1.25rem;
+    padding: 13px 40px;
+    background: #FF69B4;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-family: 'Glamor', serif;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(255,64,129,0.11);
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+.service-detail-btn:hover, .service-detail-btn:focus {
+    background: #e055a0;
+    outline: none;
+}
+
+@media (max-width: 1200px) {
+    .service-detail-image-gallery {
+        min-width: 400px;
+        max-width: 100vw;
+    }
+    .service-detail-image {
+        height: 450px;
+    }
+}
+
+@media (max-width: 900px) {
+    .service-detail-flex {
+        flex-direction: column;
+        gap: 31px;
+        align-items: stretch;
+    }
+    .service-detail-image-gallery,
+    .service-detail-content,
+    .sticky-detail-content {
+        min-width: unset;
+        max-width: unset;
+        position: static !important; /* Disable sticky on mobile for better experience */
+        top: unset !important;
+    }
+    .service-detail-image {
+        height: 300px;
+    }
+}
+</style>
+
+{% endblock %}

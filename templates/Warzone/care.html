@@ -1,0 +1,84 @@
+{% extends './navbar.html' %}
+{% load static %}
+
+{% block title %}After Care{% endblock %}
+
+{% block content %}
+<h2 style="font-size: 72px; font-family: 'senjal', sans-serif; text-align: center; width: 100%; padding: 40px; color: #222; background: #F8F3EF;">
+    After care
+</h2>
+<section class="features-section">
+  
+  <div class="feature">
+    <img src="{% static 'web-design.png' %}"  loading="lazy" alt="Custom Designed">
+    <div class="text">
+      <h3>Custom Designed</h3>
+      <p>Each LED neon sign or artwork is designed in-house by our professional designers.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'renewable-energy.png' %}" alt="Energy Efficient">
+    <div class="text">
+      <h3>Energy & Cost Efficient</h3>
+      <p>Low energy consumption, 100,000+ hour lifespan, no heat or noise.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'muscle.png' %}" alt="Durable">
+    <div class="text">
+      <h3>Durable</h3>
+      <p>Latest neon flex technology which is stronger & lighter than glass neon tubes.</p>
+    </div>
+  </div>
+
+  <div class="feature">
+    <img src="{% static 'installation.png' %}" alt="Easy to Install">
+    <div class="text">
+      <h3>Easy to Install</h3>
+      <p>Our high quality backboards feature pre-drilled holes for easy wall mounting & hanging.</p>
+    </div>
+  </div>
+</section>
+
+<section class="gallery-section">
+  <h2 class="gallery-heading">Client Results</h2>
+
+  <div class="gallery-wrapper">
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'sin1.jpg' %}" loading="lazy"  alt="2D Acrylic Sign">
+      </div>
+      <p class="card-title">Led Light Box</p>
+    </div>
+    
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'sin2.jpg' %}" loading="lazy"  alt="3D LED Sign">
+      </div>
+      <p class="card-title">3D LED Sign</p>
+    </div>
+    
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'sin4.jpg' %}" loading="lazy" alt="Neon Sign">
+      </div>
+      <p class="card-title">Custom Neon Sign</p>
+    </div>
+    
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'sin6.jpg' %}" loading="lazy" alt="Metal Cut Letter">
+      </div>
+      <p class="card-title">Metal Cut Letter</p>
+    </div>
+    <div class="card-wrapper">
+      <div class="card-1">
+        <img src="{% static 'sin7.jpg' %}" loading="lazy" alt="Metal Cut Letter">
+      </div>
+      <p class="card-title">Metal Cut Letter</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

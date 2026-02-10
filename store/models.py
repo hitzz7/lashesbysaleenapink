@@ -1,63 +1,67 @@
 from django.db import models
 
-# Create your models here.
-class Category(models.Model):
-    
+
+class ServiceCategory(models.Model):
     name = models.CharField(max_length=100)
+    slug = models.SlugField(unique=True)
     description = models.TextField(blank=True)
-    
+    image = models.ImageField(upload_to="categories/", blank=True, null=True)
 
     def __str__(self):
         return self.name
 
-    
-class Product(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE,related_name='product')
-    title = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-    date_created = models.DateField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now=True) 
-    is_active = models.BooleanField(default=True)
-    stock = models.PositiveIntegerField(default=0) 
-    price = models.DecimalField(max_digits=10, decimal_places=2)  
-    
-    
 
-    def __str__(self):
-        return self.title
-    
-class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='products/')
-    is_feature = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"Image for {self.product.title}"
-    
-class Project(models.Model):
-    
-    title = models.CharField(max_length=200)
+class Service(models.Model):
+    category = models.ForeignKey(
+        ServiceCategory,
+        related_name="services",
+        on_delete=models.CASCADE
+    )
+    name = models.CharField(max_length=200)
     description = models.TextField()
-    date_created = models.DateField(auto_now_add=True)
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.title
-
-class ProjectImage(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to='projects/')
-    is_feature = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"Image for {self.project.title}"
-
-    
-    
-class StartaProject(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    mobile = models.CharField(max_length=150)
-    description = models.TextField(blank=False)
-    
     def __str__(self):
         return self.name
+
+
+class ServiceImage(models.Model):
+    service = models.ForeignKey(
+        Service,
+        related_name="images",
+        on_delete=models.CASCADE
+    )
+    image = models.ImageField(upload_to="services/")
+    alt_text = models.CharField(max_length=150, blank=True)
+
+    def __str__(self):
+        return f"Image for {self.service.name}"
+
+from django.db import models
+
+
+class Gallery(models.Model):
+    title = models.CharField(max_length=150, blank=True)
+    image = models.ImageField(upload_to="gallery/")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title if self.title else "Gallery Image"
+
+
+class Booking(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    services = models.ManyToManyField('Service')  # ✅ allows multiple services
+    date = models.DateField()
+    time = models.TimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_confirmed = models.BooleanField(default=False)
+
+    def __str__(self):
+        service_names = ", ".join([s.name for s in self.services.all()])
+        return f"{self.name} - {service_names} on {self.date} at {self.time}"

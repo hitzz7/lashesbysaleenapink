@@ -1,0 +1,29 @@
+{% extends './navbar.html' %}
+{% load static %}
+
+{% block title %}Booking Success{% endblock %}
+
+{% block content %}
+    <h1>Thank you!</h1>
+    <p>Your booking has been submitted successfully.</p>
+    <p>
+        <strong>Details of your booking:</strong><br>
+        {% if date %}
+            <span><strong>Date:</strong> {{ date }}</span><br>
+        {% endif %}
+        {% if time %}
+            <span><strong>Time:</strong> {{ time }}</span><br>
+        {% endif %}
+        {% if services %}
+            <span><strong>Service(s):</strong>
+                {% for service in services %}
+                    {{ service }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </span><br>
+        {% endif %}
+    </p>
+    <p>
+        A confirmation email has been sent to you.
+    </p>
+    <a href="{% url 'store:category_services' %}">Back to Services</a>
+{% endblock %}

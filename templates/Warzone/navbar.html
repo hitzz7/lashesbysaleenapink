@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Express Multipurpose</title>
-
+    <title>LashesbySalena</title>
+    <link rel="icon" type="image/png" href="{% static 'lashesbysalena.png' %}">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 
@@ -17,37 +17,58 @@
 
     <!-- Discount Banner -->
     <div class="discount-banner">
-        <div class="banner-message">Welcome to ........</div>
+        <div class="banner-message">Beautiful Lashes By Salena</div>
         <div class="banner-message">15% discount on all products</div>
         <div class="banner-message">Your Summer is Here!</div>
     </div>
 
     <!-- Header -->
     <header class="header">
-        <div class="logo">
-            <a href="{% url 'store:home' %}">
-                <img src="{% static 'your logo.png' %}" alt="Logo">
-            </a>
-        </div>
+        
         
         <nav>
             <ul class="navbar" id="navbar">
-                <li><a href="{% url 'store:product' %}">Neon Light</a></li>
-                <li><a href="#">Steel Letter</a></li>
-                <li><a href="#">Stikers</a></li>
-                <li><a href="#">Bags</a></li>
-                <li><a href="#">vehicles</a></li>
-                <li><a href="#">3D Board</a></li>
-                <li><a href="#">Light Board</a></li>
-                <li><a href="#">Scroll Display</a></li>
+                <li><a href="{% url 'store:category_services' %}">Services</a></li>
+                <li><a href="{% url 'store:care' %}">Aftercare</a></li>
+                <li><a href="{% url 'store:gallery' %}">Gallary</a></li>
+                <li><a href="{% url 'store:about' %}">About</a></li>
+                
                 
             </ul>
         </nav>
-
-        <div class="icons">
-            
-            <a href="#" id="menuBtn"><i class="fas fa-bars"></i></a>
+        <div class="logo">
+            <a href="{% url 'store:home' %}">
+                <img src="{% static 'lashesbysalena.png' %}" alt="Logo">
+            </a>
         </div>
+
+        <style>
+            .appointment-btn {
+                background-color: #FF69B4;
+                color: #fff;
+                padding: 12px 47px;
+                border-radius: 10px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 25px;
+                box-shadow: 0 4px 16px rgba(255,64,129,0.10);
+                transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+                border: none;
+                outline: none;
+                letter-spacing: 1px;
+                display: inline-block;
+            }
+            .appointment-btn:hover {
+                background-color: #ff4081;
+                color: #fff;
+                box-shadow: 0 6px 24px rgba(255,64,129,0.20);
+                text-decoration: none;
+            }
+        </style>
+        <div>
+            <a href="{% url 'store:booking' %}" class="appointment-btn">
+                Book Here
+            </a>
         <div class="drawer" id="drawer">
             <ul>
                 <li><a href="#services">Services</a></li>
@@ -74,45 +95,58 @@
         {% endblock %}
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="row">
-            <div class="col">
-                <img src="{% static 'your logo.png' %}" alt="Logo" class="footer-logo">
-                <p>sinage for your business</p>
-            </div>
-            <div class="col">
-                <h4>Office<div class="underline"><span></span></div></h4>
-                <p>Phone: +977-9812345678</p>
-                <p>Email: info@yourlogo.net</p>
-                <p>Kathmandu, Nepal</p>
-            </div>
-            <div class="col">
-                <h4>Links<div class="underline"><span></span></div></h4>
-                <p><a href="#">Home</a></p>
-                <p><a href="#">Signs</a></p>
-                <p><a href="#">Services</a></p>
-                <p><a href="#">About</a></p>
-            </div>
-            <div class="col">
-                <h4>Newsletter<div class="underline"><span></span></div></h4>
-                <form>
-                    <i class="far fa-envelope"></i>
-                    <input type="email" placeholder="Enter email id" required />
-                    <button type="submit"><i class="fas fa-arrow-right"></i></button>
-                </form>
-                <div class="social-icons">
-                    <i class="fab fa-facebook-f"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-twitter"></i>
-                    <i class="fab fa-pinterest"></i>
-                </div>
-            </div>
+    <footer class="beauty-footer">
+        <div class="footer-top">
+          <div class="socials">
+            <a href="#">f</a>
+            <a href="#">i</a>
+            <a href="#">t</a>
+          </div>
+      
+          <p class="newsletter-title">SUBSCRIBE TO OUR NEWSLETTER</p>
+      
+          <form class="newsletter-form">
+            <input type="email" placeholder="Enter your email address" />
+            <button type="submit">SIGN UP</button>
+          </form>
         </div>
-        <hr />
-        <p class="copyright">© Design Maze</p>
-        
-    </footer>
+      
+        <div class="footer-content">
+          <div class="footer-brand">
+            <h2>Glow Beauty.</h2>
+            <h4>BEAUTY IS CONFIDENCE</h4>
+            <p>
+              We believe beauty is about feeling confident in your own skin.
+              Every service is designed to enhance your natural glow.
+            </p>
+          </div>
+      
+          <div class="footer-links">
+            <h4>GLOW BEAUTY</h4>
+            <a href="#">Services</a>
+            <a href="#">Our Blog</a>
+            <a href="#">Contact Us</a>
+          </div>
+      
+          <div class="footer-links">
+            <h4>POLICIES</h4>
+            <a href="#">Booking Policy</a>
+            <a href="#">Refund Policy</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+      
+          <div class="footer-links">
+            <h4>CUSTOMER CARE</h4>
+            <a href="#">My Account</a>
+            <a href="#">FAQs</a>
+          </div>
+        </div>
+      
+        <div class="footer-bottom">
+          <p>© 2026 Glow Beauty Salon. All Rights Reserved.</p>
+        </div>
+      </footer>
 
     <script>
   const menuBtn = document.getElementById("menuBtn");
