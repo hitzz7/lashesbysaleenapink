@@ -1,7 +1,53 @@
 {% extends './navbar.html' %}
 {% load static %}
 
-{% block title %}Gallery{% endblock %}
+{% block title %}Eyelash Extension Gallery | Before & After Photos - Beautiful Eyelashes by Saleena{% endblock %}
+
+{% block meta_description %}View our stunning eyelash extension gallery featuring before and after photos of our clients. See real results from classic, volume, and hybrid lash extensions in Dingera, Australia.{% endblock %}
+
+{% block extra_head %}
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Eyelash Extension Gallery | Before & After Photos">
+<meta property="og:description" content="View our stunning eyelash extension gallery featuring before and after photos of our clients. See real results from classic, volume, and hybrid lash extensions.">
+<meta property="og:url" content="https://lashesbysaleena.com/gallery/">
+<meta property="og:site_name" content="Beautiful Eyelashes by Saleena">
+<meta property="og:image" content="https://lashesbysaleena.com{% static 'beautifuleyelashesbysaleena.png' %}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eyelash Extension Gallery | Before & After Photos">
+<meta name="twitter:description" content="View our stunning eyelash extension gallery featuring before and after photos of our clients.">
+<meta name="twitter:image" content="https://lashesbysaleena.com{% static 'beautifuleyelashesbysaleena.png' %}">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://lashesbysaleena.com/gallery/">
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ImageGallery",
+  "name": "Eyelash Extension Gallery - Beautiful Eyelashes by Saleena",
+  "description": "Gallery showcasing before and after photos of eyelash extension treatments including classic, volume, and hybrid lashes.",
+  "url": "https://lashesbysaleena.com/gallery/",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Beautiful Eyelashes by Saleena",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Dingera Ave",
+      "addressLocality": "North Plympton",
+      "addressRegion": "SA",
+      "postalCode": "5037",
+      "addressCountry": "Australia"
+    },
+    "telephone": "+61420959841",
+    "email": "Saleename1994@gmail.com"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
 <section class="gallery-section">
@@ -13,17 +59,16 @@
       <div class="card-wrapper">
         <div class="card-1">
           <img src="{{ image.image.url }}" loading="lazy" alt="{{ image.alt_text|default:'Gallery Image' }}">
+          {% if image.title %}
+            <div class="overlay">{{ image.title }}</div>
+          {% endif %}
         </div>
-        {% if image.caption %}
-          <p class="card-title">{{ image.caption }}</p>
-        {% endif %}
       </div>
     {% endfor %}
   </div>
   {% else %}
     <p style="color:#888; font-size:1.1rem;">No images available.</p>
   {% endif %}
-  
 </section>
 
 <style>
@@ -38,27 +83,48 @@
     color: #222;
 }
 .gallery-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 28px 38px;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 78px 38px;
+    justify-items: center;
     align-items: flex-start;
     margin: 0 auto;
-    max-width: 1300px;
+    max-width: 1400px;
+    width: 100%;
 }
 .card-wrapper {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    flex: 0 0 auto;
-    width: 320px;
-    margin-bottom: 0;
+    width: 100%;
+    max-width: 320px;
 }
-@media (max-width: 768px) {
-  .card-wrapper {
-      width: 250px;
+@media (max-width: 1100px) {
+  .gallery-wrapper {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px 24px;
+      max-width: 1050px;
   }
 }
-
+@media (max-width: 800px) {
+  .gallery-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px 12px;
+      max-width: 650px;
+  }
+  .card-wrapper {
+      max-width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .gallery-wrapper {
+      grid-template-columns: 1fr;
+      gap: 14px 4px;
+      max-width: 95vw;
+  }
+  .card-wrapper {
+      max-width: 100%;
+  }
+}
 </style>
 {% endblock %}

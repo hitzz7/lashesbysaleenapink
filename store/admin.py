@@ -22,10 +22,36 @@ class GalleryAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ("name", "get_services", "date", "time", "is_confirmed", "created_at")
-    list_filter = ("date", "services", "is_confirmed")
+    list_display = (
+        "name",
+        "get_services",
+        "date",
+        "time",
+        "can_lie_still",
+        "wears_contacts",
+        "has_sensitivities",
+        "allergic_to_products",
+        "understands_risks",
+        "is_confirmed",
+        "created_at",
+    )
+
+    list_filter = (
+        "date",
+        "services",
+        "is_confirmed",
+        "can_lie_still",
+        "wears_contacts",
+        "has_sensitivities",
+        "allergic_to_products",
+        "understands_risks",
+    )
+
     search_fields = ("name", "email", "phone")
+    list_per_page = 25
+    ordering = ("-created_at",)
 
     def get_services(self, obj):
-        return ", ".join([s.name for s in obj.services.all()])
+        return ", ".join(s.name for s in obj.services.all())
+
     get_services.short_description = "Services"

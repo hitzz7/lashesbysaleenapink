@@ -1,27 +1,285 @@
 {% extends './navbar.html' %}
 {% load static %}
 
-{% block title %}About Us{% endblock %}
+{% block title %}About Us | Professional Eyelash Extensions in Dingera - Beautiful Eyelashes by Saleena{% endblock %}
+
+{% block meta_description %}Learn about Beautiful Eyelashes by Saleena, a premium lash studio in Dingera, Australia. Expert eyelash extensions tailored to enhance your natural beauty. Read client reviews and discover our mission.{% endblock %}
+
+{% block extra_head %}
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="About Beautiful Eyelashes by Saleena - Professional Eyelash Extensions">
+<meta property="og:description" content="Learn about Beautiful Eyelashes by Saleena, a premium lash studio in Dingera, Australia. Expert eyelash extensions tailored to enhance your natural beauty.">
+<meta property="og:url" content="https://lashesbysaleena.com/about/">
+<meta property="og:site_name" content="Beautiful Eyelashes by Saleena">
+<meta property="og:image" content="https://lashesbysaleena.com{% static 'beautifuleyelashesbysaleena.png' %}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Beautiful Eyelashes by Saleena - Professional Eyelash Extensions">
+<meta name="twitter:description" content="Learn about Beautiful Eyelashes by Saleena, a premium lash studio in Dingera, Australia. Expert eyelash extensions tailored to enhance your natural beauty.">
+<meta name="twitter:image" content="https://lashesbysaleena.com{% static 'beautifuleyelashesbysaleena.png' %}">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://lashesbysaleena.com/about/">
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About Beautiful Eyelashes by Saleena",
+  "description": "Beautiful Eyelashes by Saleena is a premium lash studio dedicated to enhancing your natural beauty and boosting your confidence with expertly crafted lash extensions.",
+  "url": "https://lashesbysaleena.com/about/",
+  "mainEntity": {
+    "@type": "BeautySalon",
+    "name": "Beautiful Eyelashes by Saleena",
+    "description": "Premium lash studio offering expertly crafted eyelash extensions tailored to enhance natural beauty and boost confidence.",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Dingera Ave",
+      "addressLocality": "North Plympton",
+      "addressRegion": "SA",
+      "postalCode": "5037",
+      "addressCountry": "Australia"
+    },
+    "telephone": "+61420959841",
+    "email": "Saleename1994@gmail.com",
+    "image": "https://lashesbysaleena.com{% static 'beautifuleyelashesbysaleena.png' %}",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "4"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Emily Cocker"
+        },
+        "reviewBody": "My first full set of classic and my technician gave me a natural look that made me feel comfortable.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Sushila Sapkota"
+        },
+        "reviewBody": "My 2nd time for my lash extensions & I loved it. Did last for a month which did cover my vacation.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "4.5"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Sue Eakten"
+        },
+        "reviewBody": "I feel light and seem like my extensions are supported pretty well, would love to try volume next time.",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        }
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Lauren Williams"
+        },
+        "reviewBody": "Thank you Saleena. So happy with my eyelash extensions! They look amazing and I've been getting compliments everywhere I go. Very satisfied with the service and results, highly recommend",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5"
+        }
+      }
+    ]
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
-
-<div class="about-section">
-    
-    <div class="about-box">
-        <div class="about-text">
-            <h2>About US</h2>
-            <p>
-                At UAE Packaging & Printing Services, we provide high-quality, custom printing and packaging solutions that enhance your brand. With years of experience and a focus on excellence, we deliver impactful designs, durable products, and reliable service to clients across the UAE, Qatar, Oman, Saudi Arabia, and beyond.
-            </p>
-            
-            <button class="button">More About Us</button>
-        </div>
-        <img src="{% static 'eyelash1.jpg' %}" alt="Service Image" class="about-image">
-        
+<section class="about-us-section">
+  <div class="about-us-heading-center">
+    <h1>About us</h1>
+  </div>
+  <div class="about-us-container">
+    <div class="about-us-text">
+      <p>
+        <strong>Beautiful Eyelashes by Saleena</strong> is a premium lash studio dedicated to enhancing your natural beauty and boosting your confidence. Our mission is to help you look and feel amazing with expertly crafted lash extensions tailored to your unique features and lifestyle.
+      </p>
+      
+      <p>
+        Whether you are new to eyelash extensions or already a fan, we look forward to welcoming you and helping you achieve your beauty goals.
+      </p>
     </div>
-    
-    
-    
-</div>
+    <div class="about-us-image-wrapper">
+      <img src="{% static 'beautifuleyelashesbysaleena.png' %}" alt="Beautiful Eyelashes by Saleena Studio" class="about-us-image">
+    </div>
+  </div>
+</section>
+<section class="scroll-image-section">
+    <img src="{% static 'eyelash1.jpg' %}" alt="Banner Main">
+    <div class="scroll-overlay-text">
+      <div class="scroll-text-top" id="text-top">Beautiful lashes </div>
+      <div class="scroll-text-bottom" id="text-bottom">By saleena</div>
+    </div>
+  </section>
+  <script>
+    // Parallax scroll effect for main banner text
+    window.addEventListener("scroll", function() {
+      var section = document.querySelector('.scroll-image-section');
+      if (!section) return;
+      var sectionRect = section.getBoundingClientRect();
+      var windowH = window.innerHeight;
+      // EXTEND the scroll trigger even MORE and movement EVEN MORE
+      if (sectionRect.top < windowH && sectionRect.bottom > 0) {
+        var triggerFactor = 7.5;
+        var scrollProgress = Math.min(Math.max(
+          (windowH - sectionRect.top) / (windowH + sectionRect.height * triggerFactor), 0), 1);
+        var topMove = scrollProgress * 1150;
+        var bottomMove = scrollProgress * 940;
+        document.getElementById('text-top').style.transform =
+          'translateX(' + topMove + 'px)';
+        document.getElementById('text-bottom').style.transform =
+          'translateX(-' + bottomMove + 'px)';
+      }
+    });
+  </script>
 
+<section class="testimonial-section">
+  <h2 class="section-title">Google Review</h2>
+  <div class="testimonial-container">
+    <div class="testimonial-card">
+      <h3 class="client-name">Emily Cocker</h3>
+      <p class="client-quote">"My first full set of classic and my technician gave me a natural look that made me feel comfortable."</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <h3 class="client-name">Sushila Sapkota</h3>
+      <p class="client-quote">"My 2nd time for my lash extensions &amp; I loved it. Did last for a month which did cover my vacation."</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <h3 class="client-name">Sue Eakten</h3>
+      <p class="client-quote">"I feel light and seem like my extensions are supported pretty well, would love to try volume next time."</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <h3 class="client-name">Lauren Williams </h3>
+      <p class="client-quote">"Thank you Saleena. So happy with my eyelash extensions! They look amazing and I’ve been getting compliments everywhere I go. Very satisfied with the service and results, highly recommend"</p>
+      <div class="stars">
+        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<style>
+.about-us-section {
+  padding: 64px 0 48px 0;
+  background: #fafcff;
+}
+.about-us-heading-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.about-us-heading-center h1 {
+  font-size: 2.7rem;
+  margin-bottom: 20px;
+  color: #111;
+  font-family: 'Senjal', Arial, sans-serif;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+}
+.about-us-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 48px 32px;
+}
+.about-us-text {
+  flex: 1 1 390px;
+  min-width: 320px;
+  max-width: 600px;
+  font-family: 'Senjal', Arial, sans-serif;
+  color: #1e2d2f;
+  padding: 0 16px;
+}
+.about-us-text p {
+  font-size: 1.47rem;
+  line-height: 1.65;
+  margin-bottom: 14px;
+  color: #31324e;
+  font-family: 'Glamour', 'Arial', sans-serif;
+}
+.about-btn {
+  display: inline-block;
+  padding: 10px 28px;
+  font-size: 1rem;
+  font-family: 'Senjal', Arial, sans-serif;
+  color: #fff;
+  background: #0097b2;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 20px;
+  letter-spacing: 0.5px;
+  transition: background 0.2s;
+}
+.about-btn:hover {
+  background: #007788;
+}
+.about-us-image-wrapper {
+  flex: 1 1 270px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 220px;
+}
+.about-us-image {
+  max-width: 340px;
+  width: 95%;
+  border-radius: 12px;
+  box-shadow: 0 6px 24px 0 rgba(36, 55, 91, 0.09);
+  border: 2px solid #e1f3fa;
+  background: #fff;
+}
+@media (max-width: 900px) {
+  .about-us-container {
+    flex-direction: column-reverse;
+    padding: 0 12px;
+    gap: 22px 0;
+  }
+  .about-us-text,
+  .about-us-image-wrapper {
+    max-width: 99vw;
+    flex: 1 1 100%;
+  }
+  .about-us-heading-center h1 {
+    font-size: 2.1rem;
+  }
+}
+</style>
 {% endblock %}

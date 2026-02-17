@@ -1,84 +1,128 @@
 {% extends './navbar.html' %}
 {% load static %}
 
-{% block title %}After Care{% endblock %}
+{% block title %}Eyelash Extension Care Tips | Before & After Care Guide - Beautiful Eyelashes by Saleena{% endblock %}
+
+{% block meta_description %}Complete guide to eyelash extension care. Learn essential before and after care tips to maintain your lash extensions longer. Professional advice from Beautiful Eyelashes by Saleena in Dingera, Australia.{% endblock %}
+
+{% block extra_head %}
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eyelash Extension Care Tips | Before & After Care Guide">
+<meta property="og:description" content="Complete guide to eyelash extension care. Learn essential before and after care tips to maintain your lash extensions longer.">
+<meta property="og:url" content="https://lashesbysaleena.com/care/">
+<meta property="og:site_name" content="Beautiful Eyelashes by Saleena">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Eyelash Extension Care Tips | Before & After Care Guide">
+<meta name="twitter:description" content="Complete guide to eyelash extension care. Learn essential before and after care tips to maintain your lash extensions longer.">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://lashesbysaleena.com/care/">
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Eyelash Extension Care Tips - Before & After Care Guide",
+  "description": "Complete guide to eyelash extension care with essential before and after care tips to maintain your lash extensions longer.",
+  "author": {
+    "@type": "Person",
+    "name": "Saleena"
+  },
+  "publisher": {
+    "@type": "LocalBusiness",
+    "name": "Beautiful Eyelashes by Saleena",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "1A Dingera Ave",
+      "addressLocality": "North Plympton",
+      "addressRegion": "SA",
+      "postalCode": "5037",
+      "addressCountry": "Australia"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://lashesbysaleena.com/care/"
+  }
+}
+</script>
+{% endblock %}
 
 {% block content %}
-<h2 style="font-size: 72px; font-family: 'senjal', sans-serif; text-align: center; width: 100%; padding: 40px; color: #222; background: #F8F3EF;">
-    After care
+<h2 class="beforecare-heading" style="font-size: 56px; font-family: 'senjal', sans-serif; text-align: center; width: 100%; padding: 32px 0 24px 0; color: #222; background: #F8F3EF;">
+  Before Care
+</h2>
+<section class="features-section beforecare-features" style="margin-bottom: 36px;">
+  <div class="feature">
+    <img src="{% static 'wash-face.png' %}" loading="lazy" alt="Arrive with clean lashes">
+    <div class="text"><h3>Come with clean lashes</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'toilet.png' %}" loading="lazy" alt="Do not curl lashes">
+    <div class="text"><h3>Use restroom before</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'mascara.png' %}" loading="lazy" alt="Plan your time">
+    <div class="text"><h3>No Mascara</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'clock.png' %}" loading="lazy" alt="No caffeine">
+    <div class="text"><h3>Arive on time</h3></div>
+  </div>
+</section>
+
+<style>
+  /* Reduce any vertical white gap between before and after care sections */
+  .beforecare-features {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  .aftercare-heading {
+    margin-top: 0 !important;
+  }
+</style>
+
+<!-- ==================== AFTER CARE SECTION ==================== -->
+<h2 class="aftercare-heading" style="font-size: 72px; font-family: 'senjal', sans-serif; text-align: center; width: 100%; padding: 40px; color: #222; background: #F8F3EF;">
+  After Care
 </h2>
 <section class="features-section">
-  
   <div class="feature">
-    <img src="{% static 'web-design.png' %}"  loading="lazy" alt="Custom Designed">
-    <div class="text">
-      <h3>Custom Designed</h3>
-      <p>Each LED neon sign or artwork is designed in-house by our professional designers.</p>
-    </div>
+    <img src="{% static 'drop.png' %}"  loading="lazy" alt="Custom Designed">
+    <div class="text"><h3>Avoid getting lashes wet for one full day</h3></div>
   </div>
-
   <div class="feature">
-    <img src="{% static 'renewable-energy.png' %}" alt="Energy Efficient">
-    <div class="text">
-      <h3>Energy & Cost Efficient</h3>
-      <p>Low energy consumption, 100,000+ hour lifespan, no heat or noise.</p>
-    </div>
+    <img src="{% static 'spray-bottle.png' %}" alt="Energy Efficient">
+    <div class="text"><h3>Use oil free products only</h3></div>
   </div>
-
   <div class="feature">
-    <img src="{% static 'muscle.png' %}" alt="Durable">
-    <div class="text">
-      <h3>Durable</h3>
-      <p>Latest neon flex technology which is stronger & lighter than glass neon tubes.</p>
-    </div>
+    <img src="{% static 'mascara.png' %}" alt="Durable">
+    <div class="text"><h3>Dont use mascara</h3></div>
   </div>
-
   <div class="feature">
-    <img src="{% static 'installation.png' %}" alt="Easy to Install">
-    <div class="text">
-      <h3>Easy to Install</h3>
-      <p>Our high quality backboards feature pre-drilled holes for easy wall mounting & hanging.</p>
-    </div>
+    <img src="{% static 'brush.png' %}" alt="Easy to Install">
+    <div class="text"><h3>Brush and clean daily</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'sleep.png' %}"  loading="lazy" alt="Custom Designed">
+    <div class="text"><h3>Sleep on your back or side</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'eyelashes.png' %}" alt="Energy Efficient">
+    <div class="text"><h3>Dont use lash curl</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'eye.png' %}" alt="Durable">
+    <div class="text"><h3>Dont pull your lashes</h3></div>
+  </div>
+  <div class="feature">
+    <img src="{% static 'appointment.png' %}" alt="Easy to Install">
+    <div class="text"><h3>Scedule a fill in appiontment</h3></div>
   </div>
 </section>
 
-<section class="gallery-section">
-  <h2 class="gallery-heading">Client Results</h2>
-
-  <div class="gallery-wrapper">
-    <div class="card-wrapper">
-      <div class="card-1">
-        <img src="{% static 'sin1.jpg' %}" loading="lazy"  alt="2D Acrylic Sign">
-      </div>
-      <p class="card-title">Led Light Box</p>
-    </div>
-    
-    <div class="card-wrapper">
-      <div class="card-1">
-        <img src="{% static 'sin2.jpg' %}" loading="lazy"  alt="3D LED Sign">
-      </div>
-      <p class="card-title">3D LED Sign</p>
-    </div>
-    
-    <div class="card-wrapper">
-      <div class="card-1">
-        <img src="{% static 'sin4.jpg' %}" loading="lazy" alt="Neon Sign">
-      </div>
-      <p class="card-title">Custom Neon Sign</p>
-    </div>
-    
-    <div class="card-wrapper">
-      <div class="card-1">
-        <img src="{% static 'sin6.jpg' %}" loading="lazy" alt="Metal Cut Letter">
-      </div>
-      <p class="card-title">Metal Cut Letter</p>
-    </div>
-    <div class="card-wrapper">
-      <div class="card-1">
-        <img src="{% static 'sin7.jpg' %}" loading="lazy" alt="Metal Cut Letter">
-      </div>
-      <p class="card-title">Metal Cut Letter</p>
-    </div>
-  </div>
-</section>
 {% endblock %}

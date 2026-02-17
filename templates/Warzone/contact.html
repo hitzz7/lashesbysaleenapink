@@ -1,186 +1,287 @@
 {% extends './navbar.html' %}
 {% load static %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}Contact Us | Eyelash Extensions in Dingera - Beautiful Eyelashes by Saleena{% endblock %}
+
+{% block meta_description %}Contact Beautiful Eyelashes by Saleena for professional eyelash extensions in Dingera, Australia. Located at 1A Dingera Ave, North Plympton SA 5037. Call 0420 959 841 or email to book your appointment.{% endblock %}
+
+{% block extra_head %}
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Contact Beautiful Eyelashes by Saleena - Eyelash Extensions in Dingera">
+<meta property="og:description" content="Contact us for professional eyelash extensions in Dingera, Australia. Located at 1A Dingera Ave, North Plympton SA 5037. Call 0420 959 841 or email to book.">
+<meta property="og:url" content="https://lashesbysaleena.com/contact/">
+<meta property="og:site_name" content="Beautiful Eyelashes by Saleena">
+<meta property="business:contact_data:street_address" content="1A Dingera Ave">
+<meta property="business:contact_data:locality" content="North Plympton">
+<meta property="business:contact_data:region" content="SA">
+<meta property="business:contact_data:postal_code" content="5037">
+<meta property="business:contact_data:country_name" content="Australia">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Contact Beautiful Eyelashes by Saleena - Eyelash Extensions in Dingera">
+<meta name="twitter:description" content="Contact us for professional eyelash extensions in Dingera, Australia. Call 0420 959 841 or email to book your appointment.">
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://lashesbysaleena.com/contact/">
+
+<!-- Schema.org JSON-LD for LocalBusiness -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BeautySalon",
+  "name": "Beautiful Eyelashes by Saleena",
+  "image": "https://lashesbysaleena.com{% static 'beautifuleyelashesbysaleena.png' %}",
+  "description": "Professional eyelash extension services in Dingera, Australia. Specializing in classic, volume, and hybrid lash extensions.",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1A Dingera Ave",
+    "addressLocality": "North Plympton",
+    "addressRegion": "SA",
+    "postalCode": "5037",
+    "addressCountry": "AU"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "-34.9600",
+    "longitude": "138.5500"
+  },
+  "url": "https://lashesbysaleena.com",
+  "telephone": "+61420959841",
+  "email": "Saleename1994@gmail.com",
+  "priceRange": "$$",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Saturday", "Sunday", "Monday", "Tuesday"],
+      "opens": "09:00",
+      "closes": "19:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Wednesday", "Thursday", "Friday"],
+      "opens": "16:00",
+      "closes": "21:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/profile.php?id=61584420451240",
+    "https://www.tiktok.com/@proudlady5194"
+  ],
+  "areaServed": {
+    "@type": "City",
+    "name": "Dingera",
+    "containedIn": {
+      "@type": "State",
+      "name": "South Australia"
+    }
+  },
+  "service": [
+    {
+      "@type": "Service",
+      "serviceType": "Eyelash Extensions",
+      "description": "Classic eyelash extensions"
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Eyelash Extensions",
+      "description": "Volume eyelash extensions"
+    },
+    {
+      "@type": "Service",
+      "serviceType": "Eyelash Extensions",
+      "description": "Hybrid eyelash extensions"
+    }
+  ]
+}
+</script>
+{% endblock %}
 
 {% block content %}
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f0f4f8;
-    }
-
-    .contact-section {
-        padding: 50px 20px;
-        background-color: #f9f9f9;
-        text-align: center;
-    }
-
-    .contact-section h1 {
-        font-size: 42px;
-        color: #222;
-        margin-bottom: 20px;
-        font-weight: 700;
-    }
-
-    .contact-section p {
-        font-size: 18px;
-        color: #666;
-        margin-bottom: 40px;
-        line-height: 1.6;
-    }
-
-    .contact-details {
-        font-size: 40px;
-        font-weight: bold;
-        margin-bottom: 60px;
-        margin-top:40px;
-        font-family:"Itronz",sans-serif;
-    }
-
-    .contact-details span {
-        display: inline-block;
-        margin: 0 20px;
-        
-        color: #333;
-    }
-
-    .form-container {
-        max-width: 800px;
-        margin: 0 auto;
-        background: #ffffff;
-        padding: 30px;
-        border-radius: 0px;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    }
-
-    .form-group {
-        margin-bottom: 20px;
-        text-align: left;
-        font-size:30px;
-        font-family: "Calton",sans-serif;
-    }
-
-    .form-group input,
-    .form-group textarea {
-        width: 95%;
-        padding: 12px 15px;
-        border: 1px solid #ddd;
-        border-radius: 0px;
-        font-size: 16px;
-        background: #fafafa;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-        border-color: #0097b2;
-        box-shadow: 0 0 6px rgba(0, 151, 178, 0.5);
-        outline: none;
-    }
-
-    .form-group label {
-        margin-bottom: 8px;
-        display: block;
-        font-weight: bold;
-        color: #444;
-    }
-
-    .submit-button {
-        font-size: 18px;
-        padding: 10px 24px;
-        background-color: #D0FF71;
-        color: black;
-        font-weight: bold;
-        border: none;
-        border-radius: 0px;
-        width: auto;
-        cursor: pointer;
-        display: inline-block;
-        align-self: center;
-        font-family:'itronz',sans-serif;
-        transition: background-color 0.3s ease;
-        
-    }
-
-    .submit-button:hover {
-        background-color: black;
-        color:white;
-    }
-
-    .form-container form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .form-container form input,
-    .form-container form textarea {
-        font-family: "Itronz",sans-serif;
-    }
-
-    /* Styling for the office info section */
-    .contact-header {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        background-color: #333;
-        color: white;
-        padding: 10px 0;
-        margin-top: 30px;
-    }
-
-    .contact-header div {
-        display: flex;
-        align-items: center;
-        font-size: 18px;
-        
-    }
-
-    .contact-header div i {
-        margin-right: 8px;
-    }
-
-</style>
-
-<!-- Contact Section -->
-<div class="contact-section" style="margin-top:60px">
-    <h2>Contact Us</h2>
-
-    <!-- Added office details in a horizontal row -->
-    <div class="contact-details">
-        <span><strong>Location</strong><br> Kathmandu, Nepal</span>
-        <span><strong>Email</strong><br>info@example.com</span>
-        <span><strong>Phone</strong><br> +977 123 456 789</span>
-    </div>
-
-    <h2>We'd love to hear from you! Please fill out the form below and we'll get back to you shortly.</h2>
-    <div class="form-container">
-        <form action="{% url 'store:contactc' %}" method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Your Name" required>
+<h1 class="contact-heading">Contact Us</h1>
+<div class="contact-container">
+    <div class="contact-info-grid">
+        <div class="contact-details">
+            <h2>Get in Touch</h2>
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:info@dolashesacademy.com"
+                    ><i class="fas fa-envelope"></i> Saleename1994@gmail.com</a
+                >
+                <br />
+                <strong>Phone:</strong>
+                <a href="tel:+61420959841"
+                    ><i class="fas fa-phone"></i> 0420 959 841</a
+                >
+            </p>
+            <div class="contact-location">
+                <h3><i class="fas fa-map-marker-alt"></i> Location</h3>
+                <p>1A Dingera Ave, North Plympton SA 5037, Australia</p>
             </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Your Email" required>
             </div>
-            <div class="form-group">
-                <label for="mobile">Phone Number</label>
-                <input type="text" id="mobile" name="mobile" placeholder="Your Phone Number" required>
+            <div class="contact-social">
+                <a
+                    href="https://www.facebook.com/profile.php?id=61584420451240&mibextid=wwXIfr&rdid=g9FHldW1RoczZP2F&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DcTyfzNYR%2F%3Fmibextid%3DwwXIfr#"
+                    target="_blank"
+                    title="Facebook"
+                    class="contact-social-icon"
+                >
+                    <i class="fab fa-facebook-square pink-social"></i>
+                </a>
+                <a
+                    href="https://wa.me/61420959841"
+                    target="_blank"
+                    title="WhatsApp"
+                    class="contact-social-icon"
+                >
+                    <i class="fab fa-whatsapp pink-social"></i>
+                </a>
+                <a
+                    href="https://www.tiktok.com/@proudlady5194"
+                    target="_blank"
+                    title="TikTok"
+                    class="contact-social-icon"
+                >
+                    <i class="fab fa-tiktok pink-social"></i>
+                </a>
+                <a
+                    href="viber://chat?number=%2B61420959841"
+                    target="_blank"
+                    title="Viber"
+                    class="contact-social-icon"
+                >
+                    <i class="fab fa-viber pink-social"></i>
+                </a>
             </div>
-            <div class="form-group">
-                <label for="description">Message</label>
-                <textarea id="description" name="description" rows="5" placeholder="Tell us more about your project" required></textarea>
-            </div>
-            <button type="submit" class="submit-button">Get Started</button>
-        </form>
+            
+        </div>
+
+        <div class="contact-map">
+            <iframe
+                src="https://www.google.com/maps?q=1A+Dingera+Ave,+North+Plympton+SA+5037,+Australia&output=embed"
+                width="100%"
+                height="350"
+                style="border:0; border-radius:12px;"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Beautiful Eyelashes by Saleena Location Map"
+            ></iframe>
+        </div>
     </div>
 </div>
 
-<!-- Contact Info below form -->
+<!-- Font Awesome for icons (only if not already included in navbar.html) -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
 
+<style>
+.contact-heading {
+    text-align: center;
+    font-size: 2.3rem;
+    color: #333;
+    font-family: 'Senjal', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 32px;
+    letter-spacing: 0.03em;
+}
+
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto 44px auto;
+    background: #fff;
+    padding: 36px;
+    border-radius: 14px;
+    box-shadow: 0 5px 24px rgba(0,0,0,0.09);
+    font-family: 'Arial', sans-serif;
+}
+
+.contact-info-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 34px;
+    align-items: flex-start;
+}
+
+.contact-details {
+    flex: 1 1 320px;
+    min-width: 280px;
+}
+
+.contact-details h2 {
+    font-size: 1.34rem;
+    color: #FF69B4;
+    font-family: 'typo',sans-serif;
+    margin-bottom: 14px;
+}
+
+.contact-details p {
+    font-size: 1.07rem;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.7;
+}
+
+.contact-details a {
+    color: #d9438c;
+    text-decoration: none;
+    word-break: break-all;
+}
+.contact-details a:hover {
+    color: #FF69B4;
+}
+
+.contact-social {
+    margin-bottom: 22px;
+}
+
+.contact-social-icon {
+    font-size: 3em;
+    margin-right: 18px;
+    /* Remove color from here; handled by .pink-social */
+    transition: color .2s;
+    vertical-align: middle;
+}
+.pink-social {
+    color: #d9438c !important;
+    transition: color 0.2s !important;
+}
+.pink-social:hover {
+    color: #FF69B4 !important;
+}
+
+.contact-location h3 {
+    font-size: 1.1rem;
+    color: #FF69B4;
+    margin-bottom: 8px;
+    font-family: 'typo',sans-serif;
+}
+
+.contact-location p {
+    color: #333;
+    font-size: 1rem;
+}
+
+.contact-map {
+    flex: 2 1 355px;
+    min-width: 270px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.11);
+}
+
+@media (max-width: 800px) {
+    .contact-info-grid {
+        flex-direction: column;
+        gap: 28px;
+    }
+    .contact-map {
+        min-width: 100%;
+        margin-top: 12px;
+    }
+}
+</style>
 {% endblock %}

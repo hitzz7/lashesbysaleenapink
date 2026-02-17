@@ -1,7 +1,18 @@
 {% extends './navbar.html' %}
 {% load static %}
 
-{% block title %}Book an Appointment{% endblock %}
+{% block title %}Book an Appointment | Beautiful Eyelashes by Saleena{% endblock %}
+
+{% block meta_description %}
+  <meta name="description" content="Book your eyelash extension appointment at lashesbysaleena.com – Dingera's trusted lash studio for classic, hybrid, volume & mega volume lashes. Quick and easy online booking with Beautiful Eyelashes by Saleena.">
+  <meta name="keywords" content="lashesbysaleena.com, book eyelash appointment Dingera, online lash booking, lash studio, eyelash extensions, classic lashes, hybrid lashes, volume lashes, mega volume, Beautiful Eyelashes by Saleena">
+  <meta property="og:title" content="Book an Appointment | lashesbysaleena.com">
+  <meta property="og:description" content="Reserve your slot for professional eyelash extensions at lashesbysaleena.com in Dingera. Choose from classic, hybrid, volume, or mega volume lashes for a flawless look.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://lashesbysaleena.com{{ request.path }}">
+  <link rel="canonical" href="https://lashesbysaleena.com{{ request.path }}">
+{% endblock %}
+
 
 {% block content %}
 <div class="booking-container">
@@ -12,58 +23,166 @@
         {{ form.non_field_errors }}
 
         <div class="vertical-form-fields" style="flex: 1 1 auto;">
-            {% if field.name == "services" %}
-    <div class="form-group services-horizontal-group">
-        {{ field.label_tag }}
-        <div class="services-boxes-container">
-            {% for group in field.field.choices %}
-                {% if group.0 %}
-                    <div class="service-category-label">{{ group.0 }}</div>
-                {% endif %}
-                <div class="services-box-group">
-                    {% for service_choice in group.1 %}
-                        {% with id=service_choice.0 name=service_choice.1 %}
-                            {% if service and id == service.id %}
-                                <!-- Pre-selected & locked service -->
-                                <input type="hidden" name="{{ field.name }}" value="{{ id }}">
-                                <label class="service-box selected">{{ name }}</label>
-                            {% else %}
-                                <input 
-                                    type="checkbox"
-                                    name="{{ field.name }}"
-                                    value="{{ id }}"
-                                    id="id_service_{{ id }}"
-                                    class="hidden-service-checkbox"
-                                    {% if field.value and id|stringformat:"s" in field.value|stringformat:"s" %}checked{% endif %}
-                                >
-                                <label 
-                                    for="id_service_{{ id }}"
-                                    class="service-box{% if field.value and id|stringformat:'s' in field.value|stringformat:'s' %} selected{% endif %}"
-                                    tabindex="0"
-                                >{{ name }}</label>
+            {% for field in form %}
+                {% if field.name == "services" %}
+                <div class="form-group services-horizontal-group">
+                    {{ field.label_tag }}
+                    <div class="services-boxes-container">
+                        {% for group in field.field.choices %}
+                            {% if group.0 %}
+                                <div class="service-category-label">{{ group.0 }}</div>
                             {% endif %}
-                        {% endwith %}
+                            <div class="services-box-group">
+                                {% for service_choice in group.1 %}
+                                    {% with id=service_choice.0 name=service_choice.1 %}
+                                        {% if service and id == service.id %}
+                                            <!-- Pre-selected & locked service -->
+                                            <input type="hidden" name="{{ field.name }}" value="{{ id }}">
+                                            <label class="service-box selected">{{ name }}</label>
+                                        {% else %}
+                                            <input 
+                                                type="checkbox"
+                                                name="{{ field.name }}"
+                                                value="{{ id }}"
+                                                id="id_service_{{ id }}"
+                                                class="hidden-service-checkbox"
+                                                {% if field.value and id|stringformat:"s" in field.value|stringformat:"s" %}checked{% endif %}
+                                            >
+                                            <label 
+                                                for="id_service_{{ id }}"
+                                                class="service-box{% if field.value and id|stringformat:'s' in field.value|stringformat:'s' %} selected{% endif %}"
+                                                tabindex="0"
+                                            >{{ name }}</label>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
                     {% endfor %}
                 </div>
+                {% elif field.name == "date" %}
+                <div class="form-group">
+                    <h3 class="booking-hours-heading" style="margin-bottom: 2px;">Opening Hours</h3>
+                    <style>
+                        .booking-hours-heading {
+                            font-size: 1.15rem;
+                            font-family: 'Senjal', Arial, sans-serif;
+                            color: #FF69B4;
+                            margin-bottom: 26px;
+                            margin-top: 0;
+                            font-weight: 700;
+                            letter-spacing: 0.03em;
+                        }
+                    </style>
+                    <p class="booking-hours">
+                        Sat - Tue&nbsp;|&nbsp;9:00 am - 7:00 pm<br>
+                        Wed - Fri&nbsp;|&nbsp;4:00 pm - 9:00 pm
+                    </p>
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                
+                {% elif field.name in "can_lie_still wears_contacts has_sensitivities allergic_to_products understands_risks" %}
+                {% if field.name == "can_lie_still" %}
+                <h3 class="consent-section-heading">Health Questions</h3>
+                {% endif %}
+                <div class="form-group consent-question-group">
+                    {{ field.label_tag }}
+                    <ul class="radio-list" aria-label="{{ field.label }}">
+                        {% for choice in field.field.widget.choices %}
+                        <li>
+                            <label class="radio-label">
+                                <input type="radio" name="{{ field.name }}" value="{{ choice.0 }}"{% if field.value == choice.0 %} checked{% endif %} required>
+                                <span>{{ choice.1 }}</span>
+                            </label>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% elif field.name == "agree_terms" %}
+                <div class="form-group terms-group">
+                    <label class="terms-label">
+                        {{ field }}
+                        <span>I agree to the <button type="button" class="terms-link-btn" id="terms-open-btn" aria-label="Read terms and conditions">terms and conditions</button></span>
+                    </label>
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.help_text %}
+                        <small class="help-text">{{ field.help_text }}</small>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                {% endif %}
             {% endfor %}
         </div>
-        {% if field.help_text %}
-            <small class="help-text">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-            <div class="error">{{ error }}</div>
-        {% endfor %}
-    </div>
-{% endif %}
-            {% endfor %}
-        </div>
+        
         <div style="margin-top: auto; display: flex; justify-content: flex-end;">
             <button type="submit" class="button">Book Now</button>
         </div>
     </form>
 </div>
 
+<!-- Terms and conditions and waiver modal -->
+<div id="terms-modal" class="terms-modal" role="dialog" aria-labelledby="terms-modal-title" aria-modal="true" hidden>
+    <div class="terms-modal-backdrop" id="terms-modal-backdrop"></div>
+    <div class="terms-modal-box">
+        <div class="terms-modal-header">
+            <h2 id="terms-modal-title">Waiver of Liability & Terms and Conditions</h2>
+            <button type="button" class="terms-modal-close" id="terms-close-btn" aria-label="Close">×</button>
+        </div>
+        <div class="terms-modal-body">
+            <h3 style="margin-top: 0;">WAIVER OF LIABILITY</h3>
+            <p>
+                I understand there are risks associated with having eyelash extensions applied to and/or removed from my natural eyelashes. Even with utmost care in the application or removal of these products there still exists risk associated with the procedure and the products used, which include without limitation eye irritation, eye pain, discomfort, and in rare cases swelling. I understand that a certain amount of eyelash adhesive material will be used and even though the professional may apply or remove my eyelashes properly, adhesive materials may become dislodged during or after the procedure which may irritate my eyes or require further follow up care at my own expense. To prevent damage to my eyes I will not attribute any liability to Do Lashes and Brows Academy Australia as the result of this procedure.
+            </p>
+            <h3>PERMISSION TO USE PICTURES</h3>
+            <p>
+                I hereby grant Do Lashes and Brows Academy Australia the full right to take, publish, and reproduce photographs of my face, my eyes and/or eyelashes for any advertising or other purpose including the right to retouch these photographs as deemed necessary. I further expressly assign any copyrights in these photographs to Do Lashes and Brows Academy Australia.
+            </p>
+            <h3>MEDICAL CONDITIONS AND INFORMED CONSENT</h3>
+            <p>
+                I acknowledge that I have been advised of the potential harmful or negative effects such as the premature shedding of my eyelashes, or the lash extension procedure removal may cause to those who have specific skin or medical conditions. I understand that the adhesive and the remover are skin and eye irritants which in rare cases may cause allergy. I understand that the procedure requires I lay down and stay still for 2 hours or more with my eyes shut. Furthermore, I state that I have no known medical condition that can prevent me from proceeding with this appointment.
+            </p>
+            <p>
+                I have agreed to have eyelash extensions applied to and/or removed from my natural lashes and I accept to pay in full amount on the day of procedure. I must complete this agreement and provide my informed consent by signing and dating where indicated below.
+            </p>
+            <hr>
+            
+            <p>
+                By ticking the box and submitting, you confirm that you have read and agree to this waiver, informed consent, photo release, and all terms and conditions.
+            </p>
+        </div>
+    </div>
+</div>
+
 <style>
+    
 .booking-container {
     max-width: 800px;
     margin: 50px auto;
@@ -85,7 +204,7 @@
 .booking-subtitle {
     margin-bottom: 25px;
     font-size: 1rem;
-    color: #666;
+    color: #FF69B4;
     font-family: 'typo', sans-serif;
 }
 
@@ -114,7 +233,7 @@
 
 .service-category-label {
     font-size: 1.5rem;
-    color: #007a91;
+    color: #FF69B4;
     font-weight: 600;
     margin: 14px 0 8px 8px;
     font-family: 'Glamor', sans-serif;
@@ -146,17 +265,17 @@
 
 .service-box.selected,
 .service-box:active {
-    background: #0097b2;
+    background: #f8c0d2;
     color: #fff;
-    border-color: #0097b2;
+    border-color: #FF69B4;
     font-weight: bold;
     box-shadow: 0 3px 12px rgba(0, 151, 178, 0.12);
 }
 
 .service-box:hover {
-    border-color: #007a91;
-    background: #e7f7fa;
-    color: #0097b2;
+    border-color: #DC90A9;
+    background: #fde9ef;
+    color: #FF69B4;
 }
 
 .booking-form label {
@@ -218,6 +337,160 @@
 .hidden-service-checkbox {
     display: none !important;
 }
+
+.booking-hours {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    color: #111;
+    font-weight: 600;
+    font-family: 'typo', Arial, sans-serif;
+}
+
+.terms-group {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+.terms-label {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: normal !important;
+    font-size: 1rem !important;
+}
+
+.terms-label input[type="checkbox"] {
+    width: auto;
+    flex-shrink: 0;
+}
+
+.terms-link-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: #0097b2;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.terms-link-btn:hover {
+    color: #007a91;
+}
+
+/* Consent & health question section */
+.consent-section-heading {
+    font-size: 1.15rem;
+    color: #FF69B4;
+    margin: 20px 0 8px 0;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-family: 'Senjal', Arial, sans-serif;
+}
+
+.consent-question-group .radio-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 60px;
+}
+
+.consent-question-group .radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.consent-question-group .radio-label input[type="radio"] {
+    width: auto;
+    position: relative;
+    top: -7px;
+}
+
+/* Terms modal */
+.terms-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.terms-modal[hidden] {
+    display: none;
+}
+
+.terms-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.terms-modal-box {
+    position: relative;
+    max-width: 520px;
+    max-height: 85vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.terms-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background: #f8f9fa;
+}
+
+.terms-modal-header h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    color: #333;
+    font-family: 'typo', sans-serif;
+}
+
+.terms-modal-close {
+    background: none;
+    border: none;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: #666;
+    cursor: pointer;
+    padding: 0 6px;
+}
+
+.terms-modal-close:hover {
+    color: #333;
+}
+
+.terms-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #444;
+}
+
+.terms-modal-body ul {
+    margin: 12px 0;
+    padding-left: 22px;
+}
+
+.terms-modal-body li {
+    margin-bottom: 8px;
+}
 </style>
 <script>
 // Service selection box logic
@@ -244,6 +517,25 @@ document.addEventListener("DOMContentLoaded", function() {
             label.classList.toggle('selected', input.checked);
         });
     });
+
+    // Terms and conditions modal: open when "terms and conditions" is clicked
+    var termsModal = document.getElementById("terms-modal");
+    var termsOpenBtn = document.getElementById("terms-open-btn");
+    var termsCloseBtn = document.getElementById("terms-close-btn");
+    var termsBackdrop = document.getElementById("terms-modal-backdrop");
+
+    if (termsOpenBtn) {
+        termsOpenBtn.addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (termsModal) termsModal.removeAttribute("hidden");
+        });
+    }
+    function closeTermsModal() {
+        if (termsModal) termsModal.setAttribute("hidden", "");
+    }
+    if (termsCloseBtn) termsCloseBtn.addEventListener("click", closeTermsModal);
+    if (termsBackdrop) termsBackdrop.addEventListener("click", closeTermsModal);
 });
 </script>
 {% endblock %}

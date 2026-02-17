@@ -4,8 +4,11 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>LashesbySalena</title>
+    <title>{% block title %}Eyelash Extensions in Dingera | Beautiful Eyelashes by Saleena{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Expert eyelash extensions in Dingera. Classic, volume & hybrid lashes by a professional lash artist. Book your appointment today.{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}eyelash extensions, lash extensions, eyelash extensions Dingera, lash artist, classic lashes, volume lashes, hybrid lashes, Beautiful Eyelashes by Saleena{% endblock %}">
     <link rel="icon" type="image/png" href="{% static 'lashesbysalena.png' %}">
+    {% block extra_head %}{% endblock %}
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 
@@ -17,9 +20,9 @@
 
     <!-- Discount Banner -->
     <div class="discount-banner">
-        <div class="banner-message">Beautiful Lashes By Salena</div>
-        <div class="banner-message">15% discount on all products</div>
-        <div class="banner-message">Your Summer is Here!</div>
+        <div class="banner-message">Eyelash Extensions in Dingera — Beautiful Lashes by Saleena</div>
+        <div class="banner-message">Your eyes deserve the spotlight</div>
+        <div class="banner-message">Professional lash in Dingera</div>
     </div>
 
     <!-- Header -->
@@ -28,43 +31,22 @@
         
         <nav>
             <ul class="navbar" id="navbar">
-                <li><a href="{% url 'store:category_services' %}">Services</a></li>
-                <li><a href="{% url 'store:care' %}">Aftercare</a></li>
-                <li><a href="{% url 'store:gallery' %}">Gallary</a></li>
+                <li><a href="{% url 'store:category_services' %}">Eyelashes</a></li>
+                <li><a href="{% url 'store:care' %}">Caretips</a></li>
+                <li><a href="{% url 'store:gallery' %}">Gallery</a></li>
                 <li><a href="{% url 'store:about' %}">About</a></li>
+                <li><a href="{% url 'store:contact' %}">Contact</a></li>
                 
                 
             </ul>
         </nav>
         <div class="logo">
             <a href="{% url 'store:home' %}">
-                <img src="{% static 'lashesbysalena.png' %}" alt="Logo">
+                <img src="{% static 'lashesbysalena.png' %}" alt="Beautiful Eyelashes by Saleena — Eyelash Extensions in Dingera">
             </a>
         </div>
 
-        <style>
-            .appointment-btn {
-                background-color: #FF69B4;
-                color: #fff;
-                padding: 12px 47px;
-                border-radius: 10px;
-                text-decoration: none;
-                font-weight: 600;
-                font-size: 25px;
-                box-shadow: 0 4px 16px rgba(255,64,129,0.10);
-                transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-                border: none;
-                outline: none;
-                letter-spacing: 1px;
-                display: inline-block;
-            }
-            .appointment-btn:hover {
-                background-color: #ff4081;
-                color: #fff;
-                box-shadow: 0 6px 24px rgba(255,64,129,0.20);
-                text-decoration: none;
-            }
-        </style>
+        
         <div>
             <a href="{% url 'store:booking' %}" class="appointment-btn">
                 Book Here
@@ -94,77 +76,107 @@
         <!-- Page-specific content -->
         {% endblock %}
     </main>
+    <footer class="footer">
+      <div class="footer-container">
 
-    <footer class="beauty-footer">
-        <div class="footer-top">
-          <div class="socials">
-            <a href="#">f</a>
-            <a href="#">i</a>
-            <a href="#">t</a>
-          </div>
-      
-          <p class="newsletter-title">SUBSCRIBE TO OUR NEWSLETTER</p>
-      
-          <form class="newsletter-form">
-            <input type="email" placeholder="Enter your email address" />
-            <button type="submit">SIGN UP</button>
-          </form>
+        <!-- Left Column -->
+        <div class="footer-logo">
+            <img src="{% static 'lashesbysalena.png' %}" alt="Grey Standard Pet Grooming Logo" style="height: 400px; margin-top: -130px;">
         </div>
-      
-        <div class="footer-content">
-          <div class="footer-brand">
-            <h2>Glow Beauty.</h2>
-            <h4>BEAUTY IS CONFIDENCE</h4>
-            <p>
-              We believe beauty is about feeling confident in your own skin.
-              Every service is designed to enhance your natural glow.
-            </p>
-          </div>
-      
-          <div class="footer-links">
-            <h4>GLOW BEAUTY</h4>
-            <a href="#">Services</a>
-            <a href="#">Our Blog</a>
-            <a href="#">Contact Us</a>
-          </div>
-      
-          <div class="footer-links">
-            <h4>POLICIES</h4>
-            <a href="#">Booking Policy</a>
-            <a href="#">Refund Policy</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-          </div>
-      
-          <div class="footer-links">
-            <h4>CUSTOMER CARE</h4>
-            <a href="#">My Account</a>
-            <a href="#">FAQs</a>
-          </div>
+        <div class="footer-col">
+          <h2 style="font-size:1.7em;">Main Location</h2>
+          <address>
+            <span itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+              <span itemprop="streetAddress">1A Dingera Ave</span>,<br>
+              <span itemprop="addressLocality">North Plympton</span>, 
+              <span itemprop="addressRegion">SA</span> 
+              <span itemprop="postalCode">5037</span>, 
+              <span itemprop="addressCountry">Australia</span>
+            </span>
+          </address>
+          <p class="hours"><strong>Opening hours</strong><br>
+            Sat - Tue | 9:00 am - 7:00 pm
+            <br>
+            Wed - Fri | 4:00 pm - 9:00 pm
+            
+          </p>
         </div>
-      
-        <div class="footer-bottom">
-          <p>© 2026 Glow Beauty Salon. All Rights Reserved.</p>
+
+        <!-- Middle Column: Site Navigation for SEO -->
+        <div class="footer-col">
+          <nav aria-label="Footer Menu">
+            <ul class="footer-menu">
+              <li><a href="{% url 'store:category_services' %}">Eyelashes</a></li>
+              <li><a href="{% url 'store:care' %}">Caretips</a></li>
+              <li><a href="{% url 'store:gallery' %}">Gallery</a></li>
+              <li><a href="{% url 'store:about' %}">About</a></li>
+              <li><a href="{% url 'store:contact' %}">Contact</a></li>
+              
+            </ul>
+          </nav>
         </div>
-      </footer>
+
+        <!-- Right Column: Google Maps Link -->
+        <div class="footer-col" style="margin-right: 40px;">
+          <h4>Beautiful Eyelashes by Saleena</h4>
+          
+        </div>
+
+        <!-- Social Icons for Engagement -->
+        <div class="footer-social">
+          <a
+            href="https://www.facebook.com/profile.php?id=61584420451240&mibextid=wwXIfr&rdid=g9FHldW1RoczZP2F&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1DcTyfzNYR%2F%3Fmibextid%3DwwXIfr#"
+            target="_blank"
+            title="Find us on Facebook"
+          >
+           
+          
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a
+            href="https://www.tiktok.com/@proudlady5194"
+            target="_blank"
+            title="Visit our TikTok"
+          >
+            <i class="fab fa-tiktok"></i>
+          </a>
+          <a
+            href="viber://chat?number=%2B61420959841"
+          <a href="https://wa.me/9779705428705" target="_blank" title="WhatsApp with Grey Standard Pet Grooming">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="viber://chat?number=+9779705428705" target="_blank" title="Chat on Viber">
+            <i class="fab fa-viber"></i>
+          </a>
+        </div>
+    
+      </div>
+    
+      <!-- Bottom Bar with copyright and agency -->
+      <div class="footer-bottom" style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+        <p style="text-align: center; margin: 0; color: #000;">© 2025 Lashes by Saleena Dingera , Australia  All Rights Reserved </p>
+        <h3 style="text-align: center; color: #111; font-size: 23px; margin: 0; font-family: 'typo', Arial, sans-serif;">
+           <a href="https://hitzz.co" target="_blank" rel="noopener" style="color: #111; text-decoration: underline;">Crafted by Hitzz</a>
+        </h3>
+      </div>
+    </footer>
 
     <script>
   const menuBtn = document.getElementById("menuBtn");
   const drawer = document.getElementById("drawer");
   const overlay = document.getElementById("overlay");
 
-  // Open drawer
-  menuBtn.addEventListener("click", function (e) {
-    e.preventDefault();
-    drawer.classList.add("open");
-    overlay.classList.add("active");
-  });
-
-  // Close drawer when clicking outside
-  overlay.addEventListener("click", function () {
-    drawer.classList.remove("open");
-    overlay.classList.remove("active");
-  });
+  if (menuBtn && drawer && overlay) {
+    menuBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      drawer.classList.add("open");
+      overlay.classList.add("active");
+    });
+    overlay.addEventListener("click", function () {
+      drawer.classList.remove("open");
+      overlay.classList.remove("active");
+    });
+  }
 </script>
 
     <!-- Scripts -->

@@ -1,12 +1,16 @@
 {% extends './navbar.html' %}
 {% load static %}
 
-{% block title %}Our Services{% endblock %}
+{% block title %}Eyelash Extension Services in Dingera | Classic, Hybrid, Volume & More | Beautiful Eyelashes by Saleena{% endblock %}
+<meta name="description" content="Explore our range of professional eyelash extension services in Dingera: Classic, Hybrid, Volume, and Mega Volume lashes for a stunning look. Discover why Beautiful Eyelashes by Saleena is Dingera’s top-rated studio for natural and glamorous lash transformations.">
+<meta name="keywords" content="eyelash extensions Dingera, classic lashes, volume lashes, hybrid eyelashes, mega volume eyelash, lash studio, Beautiful Eyelashes by Saleena, Dingera beauty, professional lashes, eyelash services near me">
+<link rel="canonical" href="https://lashesbysaleena.com{{ request.path }}">
+
 
 {% block content %}
 
 <style>
-   
+
 </style>
 
 <style>
@@ -26,7 +30,7 @@
 .category-header h2 {
     font-family: 'Senjal', Arial, sans-serif;
     font-size: 2.3rem;
-    color: #0097b2;
+    color: hotpink;
     margin-bottom: 10px;
     margin-top: 10px;
 }
@@ -35,14 +39,14 @@
     margin: 70px 40px;
 }
 </style>
-<h1 class="services-main-title">Beauty Services</h1>
+<h1 class="services-main-title">Beautiful Eyelashes</h1>
 
 {% for category in categories %}
     <section class="category-section">
 
         <!-- Category Info -->
         <div class="category-header">
-            
+
             <h2>{{ category.name }}</h2>
             <p class="category-description">{{ category.description }}</p>
             <style>
@@ -64,7 +68,7 @@
             <div class="carousel-track" id="carouselTrack-{{ forloop.counter0 }}">
                 {% for service in category.services.all %}
                     {% if service.is_active %}
-                    <div class="card-outer">
+                    <div class="card-outer carousel-slide-{{ forloop.parentloop.counter0 }}">
                         <a href="{% url 'store:service_detail' service.id %}" style="text-decoration:none;color:inherit;">
                             <div class="card" style="cursor:pointer;">
                                 {% if service.images.first %}
@@ -74,9 +78,9 @@
                             </div>
                         </a>
                         <div class="card-details">
-                            <span class="card-price">Rs {{ service.price }}</span>
+                            <span class="card-price">AUD {{ service.price }}</span>
                             <span class="card-desc">{{ service.description|truncatewords:15 }}</span>
-                            <a href="{% url 'store:service_detail' service.id %}" style="display:block; color:#0097b2; font-weight:bold; margin-top:10px; text-decoration:none;">View Details</a>
+                            <a href="{% url 'store:service_detail' service.id %}" style="display:block; color:#DC90A9; font-weight:bold; margin-top:10px; text-decoration:none;">View Details</a>
                         </div>
                     </div>
                     {% endif %}
@@ -87,10 +91,62 @@
             <button class="carousel-btn next" id="nextBtn-{{ forloop.counter0 }}">&#10095;</button>
         </div>
 
-        <!-- Services -->
-       
+        <!-- ==================== SCRIPTS (JS) ==================== -->
+        {% comment %}
+            The following script is added for each carousel category and uses unique IDs for multiple instances.
+        {% endcomment %}
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Scope variables for each carousel instance
+            const carouselIndex = {{ forloop.counter0 }};
+            const carouselTrack = document.getElementById("carouselTrack-" + carouselIndex);
+            const prevBtn = document.getElementById("prevBtn-" + carouselIndex);
+            const nextBtn = document.getElementById("nextBtn-" + carouselIndex);
+
+            if (!carouselTrack || !prevBtn || !nextBtn) return;
+            const slides = Array.from(carouselTrack.querySelectorAll(".card-outer"));
+
+            let slideWidth = slides.length > 0 ? slides[0].offsetWidth + 60 : 400; // include gap
+
+            let currentIndex = 0;
+
+            function updateButtons() {
+              prevBtn.disabled = (currentIndex <= 0);
+              nextBtn.disabled = (currentIndex >= slides.length - 1);
+            }
+
+            function goToSlide(index) {
+                if (!carouselTrack) return;
+                // Clamp index
+                index = Math.max(0, Math.min(index, slides.length - 1));
+                currentIndex = index;
+                carouselTrack.scrollTo({
+                    left: slideWidth * currentIndex,
+                    behavior: 'smooth'
+                });
+                updateButtons();
+            }
+
+            window.addEventListener('resize', () => {
+                if (slides.length > 0) {
+                    slideWidth = slides[0].offsetWidth + 60;
+                }
+            });
+
+            prevBtn.addEventListener('click', function() {
+                goToSlide(currentIndex - 1);
+            });
+
+            nextBtn.addEventListener('click', function() {
+                goToSlide(currentIndex + 1);
+            });
+
+            updateButtons();
+        });
+        </script>
 
     </section>
+
 {% endfor %}
 
 {% endblock %}
