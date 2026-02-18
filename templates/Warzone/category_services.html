@@ -10,10 +10,6 @@
 {% block content %}
 
 <style>
-
-</style>
-
-<style>
 @font-face {
     font-family: 'Senjal';
     src: url("{% static 'fonts/Senjal-Regular.ttf' %}") format('truetype');
@@ -37,6 +33,31 @@
 /* Add margin to category sections */
 .category-section {
     margin: 70px 40px;
+}
+/* Hide carousel navigation and use a grid on small screens */
+@media (max-width: 480px) {
+    .carousel-btn,
+    .carousel-track {
+        all: unset;
+    }
+    .carousel-track {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 24px !important;
+        overflow: visible !important;
+        scroll-behavior: auto !important;
+    }
+    .carousel-btn {
+        display: none !important;
+    }
+    .card-outer {
+        width: 100% !important;
+        min-width: unset !important;
+    }
+    .card {
+        width: 100% !important;
+        height: 230px !important;
+    }
 }
 </style>
 <h1 class="services-main-title">Beautiful Eyelashes</h1>
@@ -97,6 +118,12 @@
         {% endcomment %}
         <script>
         document.addEventListener("DOMContentLoaded", function() {
+            // Only enable carousel logic if not on small screens
+            if (window.innerWidth <= 480) {
+                // On small screens, carousel is disabled
+                return;
+            }
+
             // Scope variables for each carousel instance
             const carouselIndex = {{ forloop.counter0 }};
             const carouselTrack = document.getElementById("carouselTrack-" + carouselIndex);
@@ -128,6 +155,10 @@
             }
 
             window.addEventListener('resize', () => {
+                if (window.innerWidth <= 480) {
+                    // On resize to small screen, reload to ensure correct view
+                    window.location.reload();
+                }
                 if (slides.length > 0) {
                     slideWidth = slides[0].offsetWidth + 60;
                 }
