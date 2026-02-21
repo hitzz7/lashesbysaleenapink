@@ -3,8 +3,9 @@
 
 {% block title %}Book an Appointment | Beautiful Eyelashes by Saleena{% endblock %}
 
-{% block meta_description %}
-  <meta name="description" content="Book your eyelash extension appointment at lashesbysaleena.com – Dingera's trusted lash studio for classic, hybrid, volume & mega volume lashes. Quick and easy online booking with Beautiful Eyelashes by Saleena.">
+{% block meta_description %}Book your eyelash extension appointment at lashesbysaleena.com – Dingera's trusted lash studio for classic, hybrid, volume & mega volume lashes. Quick and easy online booking with Beautiful Eyelashes by Saleena.{% endblock %}
+
+{% block extra_head %}
   <meta name="keywords" content="lashesbysaleena.com, book eyelash appointment Dingera, online lash booking, lash studio, eyelash extensions, classic lashes, hybrid lashes, volume lashes, mega volume, Beautiful Eyelashes by Saleena">
   <meta property="og:title" content="Book an Appointment | lashesbysaleena.com">
   <meta property="og:description" content="Reserve your slot for professional eyelash extensions at lashesbysaleena.com in Dingera. Choose from classic, hybrid, volume, or mega volume lashes for a flawless look.">
@@ -67,25 +68,52 @@
                     {% endfor %}
                 </div>
                 {% elif field.name == "date" %}
-                <div class="form-group">
+                <!-- Custom Calendar and Time Picker -->
+                <div class="form-group calendar-time-picker-group">
                     <h3 class="booking-hours-heading" style="margin-bottom: 2px;">Opening Hours</h3>
-                    <style>
-                        .booking-hours-heading {
-                            font-size: 1.15rem;
-                            font-family: 'Senjal', Arial, sans-serif;
-                            color: #FF69B4;
-                            margin-bottom: 26px;
-                            margin-top: 0;
-                            font-weight: 700;
-                            letter-spacing: 0.03em;
-                        }
-                    </style>
                     <p class="booking-hours">
                         Sat - Tue&nbsp;|&nbsp;9:00 am - 7:00 pm<br>
                         Wed - Fri&nbsp;|&nbsp;4:00 pm - 9:00 pm
                     </p>
-                    {{ field.label_tag }}
+                    
+                    <!-- Hidden inputs for form submission -->
                     {{ field }}
+                    
+                    <!-- Custom Calendar UI -->
+                    <div class="calendar-time-picker">
+                        <div class="calendar-header">
+                            <div class="month-selector">
+                                <select id="month-selector" class="month-dropdown">
+                                    <option value="0">January</option>
+                                    <option value="1">February</option>
+                                    <option value="2">March</option>
+                                    <option value="3">April</option>
+                                    <option value="4">May</option>
+                                    <option value="5">June</option>
+                                    <option value="6">July</option>
+                                    <option value="7">August</option>
+                                    <option value="8">September</option>
+                                    <option value="9">October</option>
+                                    <option value="10">November</option>
+                                    <option value="11">December</option>
+                                </select>
+                            </div>
+                            <a href="#" class="back-to-today" id="back-to-today">Back to Today</a>
+                        </div>
+                        
+                        <div class="calendar-week-view">
+                            <button type="button" class="week-nav-btn week-nav-prev" id="week-prev">‹</button>
+                            <div class="week-days-container" id="week-days-container">
+                                <!-- Days will be populated by JavaScript -->
+                            </div>
+                            <button type="button" class="week-nav-btn week-nav-next" id="week-next">›</button>
+                        </div>
+                        
+                        <div class="time-slots-container" id="time-slots-container">
+                            <!-- Time slots will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    
                     {% if field.help_text %}
                         <small class="help-text">{{ field.help_text }}</small>
                     {% endif %}
@@ -94,6 +122,11 @@
                     {% endfor %}
                 </div>
                 
+                {% elif field.name == "time" %}
+                <!-- Time field is handled by calendar component above -->
+                <div style="display: none;">
+                    {{ field }}
+                </div>
                 {% elif field.name in "can_lie_still wears_contacts has_sensitivities allergic_to_products understands_risks" %}
                 {% if field.name == "can_lie_still" %}
                 <h3 class="consent-section-heading">Health Questions</h3>
@@ -143,8 +176,19 @@
         </div>
         
         <div style="margin-top: auto; display: flex; justify-content: flex-end;">
-            <button type="submit" class="button">Book Now</button>
+            <button type="submit" class="button book-now-btn">Book Now</button>
         </div>
+        <style>
+        @media (max-width: 480px) {
+            .book-now-btn {
+                font-size: 1.3rem !important;
+                padding: 1.1em 2.1em !important;
+                min-width: 80vw;
+                width: auto;
+                border-radius: 8px;
+            }
+        }
+        </style>
     </form>
 </div>
 
@@ -491,6 +535,345 @@
 .terms-modal-body li {
     margin-bottom: 8px;
 }
+
+/* Calendar and Time Picker Styles */
+.calendar-time-picker-group {
+    margin-bottom: 30px;
+}
+
+.calendar-time-picker-group input[type="date"] {
+    display: none;
+}
+
+.calendar-time-picker-group label[for*="date"] {
+    display: none;
+}
+
+.calendar-time-picker {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.month-selector {
+    position: relative;
+}
+
+.month-dropdown {
+    padding: 8px 30px 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #fff;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
+}
+
+.month-dropdown:focus {
+    outline: none;
+    border-color: #0097b2;
+}
+
+.back-to-today {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.back-to-today:hover {
+    color: #333;
+    text-decoration: underline;
+}
+
+.calendar-week-view {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.week-nav-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background 0.2s;
+    flex-shrink: 0;
+    margin-top: 30px;
+}
+
+.week-nav-btn:hover {
+    background: #f0f0f0;
+}
+
+.week-days-container {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+}
+
+.day-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width: 0;
+}
+
+.day-header {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.day-number {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 12px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 36px;
+    text-align: center;
+}
+
+.day-number:hover {
+    background: #f0f0f0;
+}
+
+.day-number.selected {
+    background: #FF69B4;
+    color: #fff;
+}
+
+.month-transition-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #FF69B4;
+    z-index: 2;
+}
+
+.month-transition-label {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #FF69B4;
+    color: #fff;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.time-slots-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+    align-items: center;
+}
+
+.time-slots-prompt {
+    margin: 0;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.time-slot {
+    padding: 10px 16px;
+    background: #f8f9fa;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.time-slot:hover {
+    background: #e9ecef;
+    border-color: #ccc;
+}
+
+.time-slot.selected {
+    background: #fff;
+    border: 2px solid #ffd700;
+    color: #333;
+    font-weight: 500;
+}
+
+.time-slot.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: #f5f5f5;
+}
+
+.time-slot.empty {
+    visibility: hidden;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .calendar-week-view {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .week-days-container {
+        min-width: 600px;
+    }
+    
+    .time-slot {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .booking-container {
+        padding: 15px;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+
+    .booking-container h1 {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .booking-subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+    }
+
+    .calendar-time-picker {
+        padding: 12px;
+        margin-top: 15px;
+        border-radius: 8px;
+    }
+
+    .calendar-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .month-dropdown {
+        padding: 6px 25px 6px 10px;
+        font-size: 0.9rem;
+        width: 100%;
+    }
+
+    .back-to-today {
+        font-size: 0.85rem;
+        align-self: flex-end;
+    }
+
+    .calendar-week-view {
+        gap: 4px;
+        margin-bottom: 15px;
+    }
+
+    .week-nav-btn {
+        font-size: 20px;
+        padding: 4px 6px;
+        margin-top: 25px;
+    }
+
+    .week-days-container {
+        gap: 4px;
+        min-width: 100%;
+    }
+
+    .day-column {
+        min-width: 0;
+    }
+
+    .day-header {
+        font-size: 0.65rem;
+        margin-bottom: 6px;
+        letter-spacing: 0.3px;
+    }
+
+    .day-number {
+        font-size: 0.95rem;
+        padding: 5px 6px;
+        margin-bottom: 8px;
+        min-width: 28px;
+    }
+
+    .month-transition-label {
+        font-size: 0.6rem;
+        padding: 1px 4px;
+        top: -6px;
+    }
+
+    .time-slots-container {
+        gap: 6px;
+        margin-top: 12px;
+        justify-content: center;
+    }
+
+    .time-slots-prompt {
+        font-size: 0.85rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .time-slot {
+        font-size: 0.75rem;
+        padding: 8px 10px;
+        flex: 0 0 auto;
+        min-width: 60px;
+    }
+
+    .booking-hours-heading {
+        font-size: 1rem !important;
+        margin-bottom: 8px !important;
+    }
+
+    .booking-hours {
+        font-size: 0.85rem !important;
+        margin-bottom: 12px !important;
+    }
+}
 </style>
 <script>
 // Service selection box logic
@@ -536,6 +919,332 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     if (termsCloseBtn) termsCloseBtn.addEventListener("click", closeTermsModal);
     if (termsBackdrop) termsBackdrop.addEventListener("click", closeTermsModal);
+
+    // Calendar and Time Picker Logic
+    const monthSelector = document.getElementById("month-selector");
+    const weekDaysContainer = document.getElementById("week-days-container");
+    const timeSlotsContainer = document.getElementById("time-slots-container");
+    const weekPrevBtn = document.getElementById("week-prev");
+    const weekNextBtn = document.getElementById("week-next");
+    const backToTodayBtn = document.getElementById("back-to-today");
+    const dateInput = document.querySelector('input[type="date"][name="date"], input[name="date"]');
+    const timeInput = document.querySelector('input[type="time"][name="time"], input[name="time"]');
+
+    let currentWeekStart = new Date();
+    let selectedDate = null;
+    let selectedTime = null;
+
+    // Set current week start to Monday of current week
+    function setToMonday(date) {
+        const day = date.getDay();
+        const diff = date.getDate() - day + (day === 0 ? -6 : 1); // Adjust when day is Sunday
+        return new Date(date.setDate(diff));
+    }
+
+    // Initialize to current week
+    currentWeekStart = setToMonday(new Date());
+
+    // Opening hours: Sat-Tue 9am-7pm, Wed-Fri 4pm-9pm
+    const openingHours = {
+        0: { start: 9, end: 19 },  // Sunday - 9am to 7pm
+        1: { start: 9, end: 19 },  // Monday - 9am to 7pm
+        2: { start: 9, end: 19 },  // Tuesday - 9am to 7pm
+        3: { start: 16, end: 21 }, // Wednesday - 4pm to 9pm
+        4: { start: 16, end: 21 }, // Thursday - 4pm to 9pm
+        5: { start: 16, end: 21 }, // Friday - 4pm to 9pm
+        6: { start: 9, end: 19 },  // Saturday - 9am to 7pm
+    };
+
+    // Generate time slots for a given date (based on day of week)
+    function generateTimeSlots(date) {
+        const dayOfWeek = date.getDay();
+        const hours = openingHours[dayOfWeek];
+        if (!hours) return [];
+
+        const slots = [];
+        const startHour = hours.start;
+        const endHour = hours.end;
+
+        for (let hour = startHour; hour <= endHour; hour++) {
+            slots.push(formatTime(hour, 0));
+        }
+        return slots;
+    }
+
+    // Format time as "9:00am" or "4:00pm"
+    function formatTime(hour, minute) {
+        const period = hour >= 12 ? "pm" : "am";
+        const displayHour = hour > 12 ? hour - 12 : (hour === 0 ? 12 : hour);
+        const minuteStr = minute === 0 ? "00" : minute.toString().padStart(2, "0");
+        return `${displayHour}:${minuteStr}${period}`;
+    }
+
+    // Format date as YYYY-MM-DD for input
+    function formatDateInput(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, "0");
+        const day = String(date.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    // Check if time is in the past for today
+    function isPastTime(timeString) {
+        const now = new Date();
+        const [hour, minute] = timeString.match(/(\d+):(\d+)(am|pm)/).slice(1);
+        let h = parseInt(hour);
+        const m = parseInt(minute);
+        const period = timeString.includes("pm") ? "pm" : "am";
+
+        if (period === "pm" && h !== 12) h += 12;
+        if (period === "am" && h === 12) h = 0;
+
+        const slotTime = new Date();
+        slotTime.setHours(h, m, 0, 0);
+
+        return slotTime < now;
+    }
+
+    // Format time as HH:MM for input
+    function formatTimeInput(timeString) {
+        // Convert "9:00am" to "09:00"
+        const match = timeString.match(/(\d+):(\d+)(am|pm)/);
+        if (!match) return "";
+
+        let hour = parseInt(match[1]);
+        const minute = match[2];
+        const period = match[3];
+
+        if (period === "pm" && hour !== 12) hour += 12;
+        if (period === "am" && hour === 12) hour = 0;
+
+        return `${String(hour).padStart(2, "0")}:${minute}`;
+    }
+
+    // Get week dates (Monday to Sunday)
+    function getWeekDates(startDate) {
+        const dates = [];
+        const monday = new Date(startDate);
+        monday.setDate(startDate.getDate() - (startDate.getDay() === 0 ? 6 : startDate.getDay() - 1));
+
+        for (let i = 0; i < 7; i++) {
+            const date = new Date(monday);
+            date.setDate(monday.getDate() + i);
+            dates.push(date);
+        }
+        return dates;
+    }
+
+    // Check if date is in a different month
+    function getMonthTransitionIndex(dates) {
+        for (let i = 1; i < dates.length; i++) {
+            if (dates[i].getMonth() !== dates[i - 1].getMonth()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    // Render calendar
+    function renderCalendar() {
+        const weekDates = getWeekDates(currentWeekStart);
+        const transitionIndex = getMonthTransitionIndex(weekDates);
+
+        // Update month selector
+        const firstDate = weekDates[0];
+        monthSelector.value = firstDate.getMonth();
+
+        // Clear containers
+        weekDaysContainer.innerHTML = "";
+        timeSlotsContainer.innerHTML = "";
+
+        // Render day columns only (no time slots per column)
+        const dayNames = ["MON", "TUES", "WED", "THU", "FRI", "SAT", "SUN"];
+
+        weekDates.forEach((date, index) => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const dateOnly = new Date(date);
+            dateOnly.setHours(0, 0, 0, 0);
+            const isPastDate = dateOnly < today;
+
+            const dayColumn = document.createElement("div");
+            dayColumn.className = "day-column";
+            dayColumn.dataset.date = formatDateInput(date);
+
+            if (transitionIndex === index) {
+                const transitionLine = document.createElement("div");
+                transitionLine.className = "month-transition-line";
+                const monthLabel = document.createElement("div");
+                monthLabel.className = "month-transition-label";
+                monthLabel.textContent = date.toLocaleDateString("en-US", { month: "short" }).toUpperCase();
+                transitionLine.appendChild(monthLabel);
+                dayColumn.appendChild(transitionLine);
+            }
+
+            const dayHeader = document.createElement("div");
+            dayHeader.className = "day-header";
+            dayHeader.textContent = dayNames[index];
+            dayColumn.appendChild(dayHeader);
+
+            const dayNumber = document.createElement("div");
+            dayNumber.className = "day-number";
+            dayNumber.textContent = date.getDate();
+            dayNumber.dataset.date = formatDateInput(date);
+
+            if (selectedDate && formatDateInput(date) === selectedDate) {
+                dayNumber.classList.add("selected");
+            }
+
+            if (isPastDate) {
+                dayNumber.style.opacity = "0.4";
+                dayNumber.style.cursor = "not-allowed";
+            } else {
+                dayNumber.addEventListener("click", () => selectDate(date));
+            }
+
+            dayColumn.appendChild(dayNumber);
+            weekDaysContainer.appendChild(dayColumn);
+        });
+
+        // Single horizontal row of time slots (only when a date is selected)
+        if (selectedDate) {
+            let selectedDateObj = weekDates.find(d => formatDateInput(d) === selectedDate);
+            if (!selectedDateObj) {
+                selectedDateObj = new Date(selectedDate + "T12:00:00");
+            }
+            if (selectedDateObj) {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const dateOnly = new Date(selectedDateObj);
+                dateOnly.setHours(0, 0, 0, 0);
+                const isPastDate = dateOnly < today;
+                const isToday = dateOnly.getTime() === today.getTime();
+
+                const timeSlots = generateTimeSlots(selectedDateObj);
+                timeSlots.forEach((timeSlot) => {
+                    const slot = document.createElement("button");
+                    slot.type = "button";
+                    slot.className = "time-slot";
+                    slot.textContent = timeSlot;
+                    slot.dataset.time = timeSlot;
+
+                    if (isPastDate || (isToday && isPastTime(timeSlot))) {
+                        slot.classList.add("disabled");
+                        slot.disabled = true;
+                    } else {
+                        if (selectedTime === timeSlot) slot.classList.add("selected");
+                        slot.addEventListener("click", () => selectTime(selectedDateObj, timeSlot));
+                    }
+                    timeSlotsContainer.appendChild(slot);
+                });
+            }
+        } else {
+            const prompt = document.createElement("p");
+            prompt.className = "time-slots-prompt";
+            prompt.textContent = "Select a date to see available times";
+            timeSlotsContainer.appendChild(prompt);
+        }
+    }
+
+    // Select date
+    function selectDate(date) {
+        selectedDate = formatDateInput(date);
+        selectedTime = null; // Reset time when date changes
+
+        // Update hidden input
+        if (dateInput) {
+            dateInput.value = selectedDate;
+        }
+
+        // Clear time input
+        if (timeInput) {
+            timeInput.value = "";
+        }
+
+        // Re-render to update selection
+        renderCalendar();
+    }
+
+    // Select time
+    function selectTime(date, timeSlot) {
+        selectedDate = formatDateInput(date);
+        selectedTime = timeSlot;
+
+        // Update hidden inputs
+        if (dateInput) {
+            dateInput.value = selectedDate;
+        }
+        if (timeInput) {
+            timeInput.value = formatTimeInput(timeSlot);
+        }
+
+        // Re-render to update selection
+        renderCalendar();
+    }
+
+    // Navigate weeks
+    function navigateWeek(direction) {
+        currentWeekStart = new Date(currentWeekStart);
+        currentWeekStart.setDate(currentWeekStart.getDate() + direction * 7);
+        renderCalendar();
+    }
+
+    // Event listeners
+    if (weekPrevBtn) {
+        weekPrevBtn.addEventListener("click", () => navigateWeek(-1));
+    }
+
+    if (weekNextBtn) {
+        weekNextBtn.addEventListener("click", () => navigateWeek(1));
+    }
+
+    if (monthSelector) {
+        monthSelector.addEventListener("change", function () {
+            const selectedMonth = parseInt(this.value);
+            const currentDate = new Date();
+            currentDate.setMonth(selectedMonth);
+            currentDate.setDate(1); // Set to first day of month
+            currentWeekStart = setToMonday(currentDate);
+            renderCalendar();
+        });
+    }
+
+    if (backToTodayBtn) {
+        backToTodayBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            const today = new Date();
+            currentWeekStart = setToMonday(today);
+            selectedDate = formatDateInput(today);
+            selectedTime = null;
+            if (dateInput) dateInput.value = selectedDate;
+            if (timeInput) timeInput.value = "";
+            renderCalendar();
+        });
+    }
+
+    // Initialize calendar
+    if (dateInput && dateInput.value) {
+        const existingDate = new Date(dateInput.value);
+        selectedDate = formatDateInput(existingDate);
+        currentWeekStart = setToMonday(existingDate);
+    } else {
+        // Auto-select today's date if no date is set
+        const today = new Date();
+        selectedDate = formatDateInput(today);
+        currentWeekStart = setToMonday(today);
+        if (dateInput) {
+            dateInput.value = selectedDate;
+        }
+    }
+
+    if (timeInput && timeInput.value) {
+        // Convert HH:MM back to display format
+        const [hour, minute] = timeInput.value.split(":");
+        const h = parseInt(hour);
+        selectedTime = formatTime(h, parseInt(minute));
+    }
+
+    renderCalendar();
 });
 </script>
 {% endblock %}

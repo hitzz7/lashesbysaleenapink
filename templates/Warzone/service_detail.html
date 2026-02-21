@@ -5,29 +5,21 @@
   {{ service.name }} Eyelash Extension in Dingera | Beautiful Eyelashes by Saleena
 {% endblock %}
 
-{% block meta_description %}
-  <meta name="description" content="{{ service.description|truncatewords:28 }} Get professional {{ service.name|lower }} eyelash extensions at Beautiful Eyelashes by Saleena in Dingera. Lasting beauty, safe application, personalized styles. Book now!">
+{% block meta_description %}{{ service.description|truncatewords:28 }} Get professional {{ service.name|lower }} eyelash extensions at Beautiful Eyelashes by Saleena in Dingera. Lasting beauty, safe application, personalized styles. Book now!{% endblock %}
+
+{% block extra_head %}
+  <meta name="keywords" content="eyelash extension, {{ service.name|lower }}, Dingera, lashes, Beautiful Eyelashes by Saleena, classic lashes, volume lashes, professional lash studio">
   <meta property="og:title" content="{{ service.name }} Eyelash Extension in Dingera | Beautiful Eyelashes by Saleena">
   <meta property="og:description" content="{{ service.description|truncatewords:24 }} Book your {{ service.name }} appointment today!">
   <meta property="og:image" content="{% if service.images.first %}{{ service.images.first.image.url }}{% endif %}">
   <meta property="og:type" content="article">
   <meta property="og:url" content="{{ request.build_absolute_uri }}">
-  <meta name="keywords" content="eyelash extension, {{ service.name|lower }}, Dingera, lashes, Beautiful Eyelashes by Saleena, classic lashes, volume lashes, professional lash studio">
   <link rel="canonical" href="https://lashesbysaleena.com{{ request.path }}">
 {% endblock %}
 
 {% block content %}
 
-
-
 <div class="service-detail-flex">
-    <div class="service-detail-image-gallery">
-        {% for image in service.images.all %}
-            <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="service-detail-image">
-        {% empty %}
-            <p style="color:#888;font-size:1.09rem;">No images available.</p>
-        {% endfor %}
-    </div>
     <div class="service-detail-content sticky-detail-content">
         <h1 class="service-detail-title">{{ service.name }} EyeLash</h1>
         <p class="service-detail-desc">{{ service.description }}</p>
@@ -45,6 +37,13 @@
         }
         </style>
         <a href="{% url 'store:booking' %}?service={{ service.id }}" class="service-detail-btn">Book Appointment</a>
+    </div>
+    <div class="service-detail-image-gallery">
+        {% for image in service.images.all %}
+            <img src="{{ image.image.url }}" alt="{{ image.alt_text }}" class="service-detail-image">
+        {% empty %}
+            <p style="color:#888;font-size:1.09rem;">No images available.</p>
+        {% endfor %}
     </div>
 </div>
 
@@ -108,7 +107,6 @@
     font-size: 1.5rem;
     color: hotpink;
     font-weight: bold;
-    
     font-family: 'Glamour', serif;
 }
 .service-detail-btn {
@@ -158,6 +156,37 @@
     }
     .service-detail-image {
         height: 300px;
+    }
+}
+
+/* --- Custom breakpoint for portrait mobile (≤480px): detail on top, image on bottom, 40px top margin, keep original image size --- */
+@media (max-width: 480px) {
+    .service-detail-flex {
+        flex-direction: column;
+        gap: 22px;
+        align-items: stretch;
+        margin: 40px 4vw 12px 4vw; /* margin-top: 40px, rest as before */
+    }
+    .service-detail-content {
+        order: 1;
+        margin: 0 0 12px 0;
+        padding-top: 0;
+    }
+    .service-detail-image-gallery {
+        order: 2;
+        min-width: 0;
+        max-width: unset;
+        gap: 12px;
+    }
+    .service-detail-image {
+        /* Do NOT change the image size from desktop! */
+        height: 450px;
+        border-radius: 9px;
+    }
+    .sticky-detail-content {
+        position: static !important;
+        top: unset !important;
+        align-self: stretch;
     }
 }
 </style>

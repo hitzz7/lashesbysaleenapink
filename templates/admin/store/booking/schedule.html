@@ -1,0 +1,75 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+  <a href="{% url 'admin:index' %}">{% trans 'Home' %}</a>
+  &rsaquo; <a href="{% url 'admin:store_booking_changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>
+  &rsaquo; {{ title }}
+</div>
+{% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form method="get" class="schedule-controls" style="margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center;">
+  <label>
+    Start date
+    <input type="date" name="start_date" value="{{ start_date|date:'Y-m-d' }}" style="margin-left: 6px;">
+  </label>
+  <label>
+    Start time
+    <input type="text" name="start_time" value="{{ start_time_str }}" placeholder="9:00" style="margin-left: 6px; width: 80px;">
+  </label>
+  <label>
+    Interval (min)
+    <input type="number" name="interval" value="{{ interval }}" min="15" max="60" step="15" style="margin-left: 6px; width: 60px;">
+  </label>
+  <button type="submit" class="button">Update</button>
+  <a href="{% url 'admin:store_booking_changelist' %}" class="button">Back to list</a>
+</form>
+
+<div class="schedule-wrapper" style="overflow-x: auto;">
+  <table class="schedule-grid" style="border-collapse: collapse; min-width: 700px; width: 100%;">
+    <thead>
+      <tr>
+        <th style="border: 1px solid #ddd; padding: 8px 12px; background: #f8f8f8; text-align: left; width: 90px;">Time</th>
+        {% for d in days %}
+        <th style="border: 1px solid #ddd; padding: 8px 12px; background: #f8f8f8; text-align: center;">
+          {{ d|date:"l, j" }}
+        </th>
+        {% endfor %}
+      </tr>
+    </thead>
+    <tbody>
+      {% for slot_time, row in grid %}
+      <tr>
+        <td style="border: 1px solid #ddd; padding: 6px 10px; background: #fafafa; font-size: 0.9em; white-space: nowrap;">
+          {{ slot_time|time:"g:i A" }}
+        </td>
+        {% for cell_bookings in row %}
+        <td style="border: 1px solid #ddd; padding: 4px; vertical-align: top; min-height: 40px;">
+          {% for b in cell_bookings %}
+          <div class="schedule-booking" style="margin-bottom: 4px; padding: 6px 8px; border-radius: 4px; font-size: 12px; background: #d4edda; border-left: 3px solid #28a745;">
+            <strong>{{ b.name }}</strong><br>
+            <span style="color: #555;">{% for s in b.services.all %}{{ s.name }}{% if not forloop.last %}, {% endif %}{% endfor %}</span>
+            <br>
+            <a href="{% url 'admin:store_booking_change' b.pk %}" style="font-size: 11px;">Edit</a>
+          </div>
+          {% empty %}
+          <span style="color: #ccc;">—</span>
+          {% endfor %}
+        </td>
+        {% endfor %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<p style="margin-top: 16px; color: #666;">
+  <span style="display: inline-block; width: 14px; height: 14px; background: #d4edda; border: 1px solid #28a745; border-radius: 2px; vertical-align: middle;"></span> Confirmed appointments only
+</p>
+{% endblock %}

@@ -2,9 +2,12 @@
 {% load static %}
 
 {% block title %}Eyelash Extension Services in Dingera | Classic, Hybrid, Volume & More | Beautiful Eyelashes by Saleena{% endblock %}
-<meta name="description" content="Explore our range of professional eyelash extension services in Dingera: Classic, Hybrid, Volume, and Mega Volume lashes for a stunning look. Discover why Beautiful Eyelashes by Saleena is Dingera’s top-rated studio for natural and glamorous lash transformations.">
-<meta name="keywords" content="eyelash extensions Dingera, classic lashes, volume lashes, hybrid eyelashes, mega volume eyelash, lash studio, Beautiful Eyelashes by Saleena, Dingera beauty, professional lashes, eyelash services near me">
-<link rel="canonical" href="https://lashesbysaleena.com{{ request.path }}">
+{% block meta_description %}Explore our range of professional eyelash extension services in Dingera: Classic, Hybrid, Volume, and Mega Volume lashes for a stunning look. Discover why Beautiful Eyelashes by Saleena is Dingera’s top-rated studio for natural and glamorous lash transformations.{% endblock %}
+
+{% block extra_head %}
+  <meta name="keywords" content="eyelash extensions Dingera, classic lashes, volume lashes, hybrid eyelashes, mega volume eyelash, lash studio, Beautiful Eyelashes by Saleena, Dingera beauty, professional lashes, eyelash services near me">
+  <link rel="canonical" href="https://lashesbysaleena.com{{ request.path }}">
+{% endblock %}
 
 
 {% block content %}
