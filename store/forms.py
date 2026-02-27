@@ -78,6 +78,29 @@ class BookingForm(forms.ModelForm):
             "time": forms.TimeInput(attrs={"type": "time"}),
         }
 
+    def clean(self):
+        """
+        Prevent multiple bookings at the same date and time.
+        """
+        cleaned_data = super().clean()
+        booking_date = cleaned_data.get("date")
+        booking_time = cleaned_data.get("time")
+
+        if booking_date and booking_time:
+            qs = Booking.objects.filter(date=booking_date, time=booking_time)
+            # If this form is ever used for editing existing bookings, avoid
+            # flagging the current instance as a conflict.
+            if self.instance and self.instance.pk:
+                qs = qs.exclude(pk=self.instance.pk)
+
+            if qs.exists():
+                raise forms.ValidationError(
+                    "This date and time has already been booked. "
+                    "Please choose a different time."
+                )
+
+        return cleaned_data
+
     def clean_understands_risks(self):
         value = self.cleaned_data.get("understands_risks")
         if value is False:

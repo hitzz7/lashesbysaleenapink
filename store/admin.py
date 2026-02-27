@@ -75,9 +75,9 @@ class BookingAdmin(admin.ModelAdmin):
         start_time_str = request.GET.get("start_time", "9:00")
         interval_min = int(request.GET.get("interval", 15))
 
-        # Default: 21 February (current year)
+        # Default: today's date
         today = date.today()
-        default_start = date(today.year, 2, 21)
+        default_start = today
         if start_date_str:
             try:
                 start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
