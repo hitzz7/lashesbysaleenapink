@@ -49,7 +49,11 @@ def booking_view(request, service_id=None):
     if request.method == "POST":
         form = BookingForm(request.POST)
         if form.is_valid():
-            booking = form.save()
+            booking = form.save(commit=False)
+            # New bookings stay pending until manually confirmed in admin.
+            booking.is_confirmed = False
+            booking.save()
+            form.save_m2m()
 
             # Services text
             services_selected = ", ".join([str(s) for s in booking.services.all()])
@@ -60,7 +64,7 @@ def booking_view(request, service_id=None):
 
             subject = "New Booking Received"
             message = (
-                f"A new booking has been made:\n\n"
+                f"Your booking has been confirmed and your AUD 10 dollar has been recived:\n\n"
                 f"Name: {booking.name}\n"
                 f"Email: {booking.email}\n"
                 f"Phone: {booking.phone}\n"
@@ -77,8 +81,6 @@ def booking_view(request, service_id=None):
             )
 
             recipient_list = ["Saleename1994@gmail.com"]
-            if booking.email and booking.email not in recipient_list:
-                recipient_list.append(booking.email)
 
             send_mail(
                 subject=subject,

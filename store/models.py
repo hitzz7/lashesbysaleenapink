@@ -69,7 +69,7 @@ class Booking(models.Model):
     understands_risks = models.BooleanField(default=False)
 
     created_at = models.DateTimeField(auto_now_add=True)
-    is_confirmed = models.BooleanField(default=True)
+    is_confirmed = models.BooleanField(default=False)
 
     def __str__(self):
         service_names = ", ".join([s.name for s in self.services.all()])

@@ -1,8 +1,8 @@
 from datetime import datetime, date, time, timedelta
 from django.contrib import admin
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.urls import path
-from django.utils.html import format_html
 from .models import ServiceCategory, Service, ServiceImage
 from .models import Gallery, Booking
 
@@ -61,6 +61,37 @@ class BookingAdmin(admin.ModelAdmin):
 
     get_services.short_description = "Services"
 
+    def save_model(self, request, obj, form, change):
+        """
+        Send customer confirmation email only when booking becomes confirmed.
+        """
+        was_confirmed = False
+        if change and obj.pk:
+            previous = Booking.objects.filter(pk=obj.pk).only("is_confirmed").first()
+            was_confirmed = bool(previous and previous.is_confirmed)
+
+        super().save_model(request, obj, form, change)
+
+        if obj.is_confirmed and not was_confirmed and obj.email:
+            services_selected = ", ".join([str(s) for s in obj.services.all()])
+            subject = "Your Booking Is Confirmed"
+            message = (
+                f"Hi {obj.name},\n\n"
+                "Your booking has been confirmed.\n\n"
+                f"Services: {services_selected}\n"
+                f"Date: {obj.date}\n"
+                f"Time: {obj.time}\n\n"
+                "Thank you,\n"
+                "Beautiful Eyelashes by Saleena"
+            )
+            send_mail(
+                subject=subject,
+                message=message,
+                from_email=None,
+                recipient_list=[obj.email],
+                fail_silently=True,
+            )
+
     def get_urls(self):
         urls = super().get_urls()
         custom = [
@@ -114,13 +145,12 @@ class BookingAdmin(admin.ModelAdmin):
                 break
             current_time = time(next_hour, next_minute)
 
-        # Fetch only confirmed bookings for the week
+        # Fetch all bookings for the week (confirmed + unconfirmed)
         end_date = days[-1]
         bookings = list(
             Booking.objects.filter(
                 date__gte=days[0], 
-                date__lte=end_date,
-                is_confirmed=True
+                date__lte=end_date
             ).order_by("date", "time")
         )
         # Build grid: grid[slot_index][day_index] = list of bookings for that cell (same date, same time slot)
