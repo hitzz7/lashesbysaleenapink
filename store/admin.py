@@ -104,11 +104,18 @@ class BookingAdmin(admin.ModelAdmin):
         # Parse query params with defaults
         start_date_str = request.GET.get("start_date")
         start_time_str = request.GET.get("start_time", "9:00")
-        interval_min = int(request.GET.get("interval", 15))
+        interval_min = int(request.GET.get("interval", 60))
 
-        # Default: today's date
+        # Default: earliest upcoming booking date (confirmed or not),
+        # otherwise today's date.
         today = date.today()
-        default_start = today
+        first_upcoming_booking_date = (
+            Booking.objects.filter(date__gte=today)
+            .order_by("date")
+            .values_list("date", flat=True)
+            .first()
+        )
+        default_start = first_upcoming_booking_date or today
         if start_date_str:
             try:
                 start_date = datetime.strptime(start_date_str, "%Y-%m-%d").date()
@@ -127,8 +134,8 @@ class BookingAdmin(admin.ModelAdmin):
         else:
             start_dt = datetime.combine(start_date, time(9, 0, 0))
 
-        # Build 5 weekdays (Mon–Fri)
-        num_days = 5
+        # Build 7 days so weekend bookings are also visible.
+        num_days = 7
         days = [start_date + timedelta(days=i) for i in range(num_days)]
 
         # Build time slots (every interval from 9:00 AM to 9:00 PM)
@@ -153,12 +160,26 @@ class BookingAdmin(admin.ModelAdmin):
                 date__lte=end_date
             ).order_by("date", "time")
         )
-        # Build grid: grid[slot_index][day_index] = list of bookings for that cell (same date, same time slot)
+        # Build grid: place bookings in the matching interval bucket.
+        # This keeps bookings visible even if interval changes (e.g. 30 min).
         grid = []
         for si, slot_time in enumerate(slots):
             row = []
+            slot_start_minutes = slot_time.hour * 60 + slot_time.minute
+            next_slot_minutes = slot_start_minutes + interval_min
             for di, d in enumerate(days):
-                cell_bookings = [b for b in bookings if b.date == d and b.time == slot_time]
+                cell_bookings = []
+                for b in bookings:
+                    if b.date != d:
+                        continue
+                    b_minutes = b.time.hour * 60 + b.time.minute
+                    is_last_slot = si == len(slots) - 1
+                    in_bucket = (
+                        b_minutes >= slot_start_minutes
+                        and (is_last_slot or b_minutes < next_slot_minutes)
+                    )
+                    if in_bucket:
+                        cell_bookings.append(b)
                 row.append(cell_bookings)
             grid.append((slot_time, row))
 

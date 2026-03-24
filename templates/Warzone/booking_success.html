@@ -7,8 +7,8 @@
 <div class="success-container">
     <div class="success-card">
         <div class="success-icon" aria-hidden="true">✓</div>
-        <h1 class="success-heading">Thank you</h1>
-        <p class="success-subtitle">Your appointment has been booked</p>
+        <h1 class="success-heading">Thank you for your booking!</h1>
+        <p class="success-subtitle">We have received your booking request.</p>
 
         <div class="success-details">
             <div class="success-row">
@@ -29,8 +29,10 @@
             </div>
         </div>
 
-        <p class="success-email-note">We have sent you a confirmation email.</p>
-        <p class="success-email-address">Email sent to: <strong>{{ booking.email }}</strong></p>
+        <p class="success-email-note" style="margin-bottom: 6px;">
+            Once we receive your AUD 10 booking payment, we will send you a confirmation email.
+        </p>
+        <p class="success-email-address">Confirmation will be sent to: <strong>{{ booking.email }}</strong></p>
 
         <a href="{% url 'store:home' %}" class="success-btn">Back to Home</a>
     </div>

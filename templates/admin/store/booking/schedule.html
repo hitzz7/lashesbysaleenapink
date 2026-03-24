@@ -21,12 +21,12 @@
     font-size: 12px;
   }
   .schedule-booking-confirmed {
-    background: #d4edda;
-    border-left: 3px solid #28a745;
+    background: #d4edda !important;
+    border-left: 3px solid #28a745 !important;
   }
   .schedule-booking-unconfirmed {
-    background: #f8d7da;
-    border-left: 3px solid #dc3545;
+    background: #f8d7da !important;
+    border-left: 3px solid #dc3545 !important;
   }
 </style>
 
@@ -41,7 +41,7 @@
   </label>
   <label>
     Interval (min)
-    <input type="number" name="interval" value="{{ interval }}" min="15" max="60" step="15" style="margin-left: 6px; width: 60px;">
+    <input type="number" name="interval" value="{{ interval }}" min="60" max="60" step="60" style="margin-left: 6px; width: 60px;">
   </label>
   <button type="submit" class="button">Update</button>
   <a href="{% url 'admin:store_booking_changelist' %}" class="button">Back to list</a>
