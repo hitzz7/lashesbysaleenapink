@@ -134,11 +134,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # settings.py
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'mail.lashesbysaleena.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'najus777@gmail.com'  # Your Gmail email address
-EMAIL_HOST_PASSWORD = 'ugck woat fali zlke'  # Gmail App Password (not your Gmail password)
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'info@lashesbysaleena.com'  # Your Gmail email address
+EMAIL_HOST_PASSWORD = 'lashesbysaleena'  # Gmail App Password (not your Gmail password)
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
