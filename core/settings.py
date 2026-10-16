@@ -27,9 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.1.73','lashesbysaleena.com','www.lashesbysaleena.com']
 
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
-
-# Application definition
+# # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
